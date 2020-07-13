@@ -1,0 +1,6 @@
+.idea
+*.json
+*.xlsx
+.DS_Store
+profiler-venv
+pandas_profiling1.html
