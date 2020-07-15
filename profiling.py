@@ -1,5 +1,4 @@
 import pandas as pd
-from datetime import datetime
 from pandas_profiling import ProfileReport
 from snowflake import connector
 
@@ -41,13 +40,11 @@ def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfWarehouse, sfDatabase, sfS
 
 
 def get_profile_results(data):
-    profile = ProfileReport(data, title='Pandas Profile Report')
+    profile = ProfileReport(data, title='Snowflake Data Profiler')
 
-    now = datetime.now()
+    p = profile.to_html()
 
-    profile.to_file(output_file=f"my_data/pandas_profiling_{now}.html")
-
-    return f"http://localhost:63342/snowflake-data-profiler/my_data/pandas_profiling_{now}.html"
+    return p
 
 
 def main():

@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import render_template, request, Response
 from app import app
 from app.forms import ProfileForm
 from profiling import connect_to_snowflake, get_profile_results
@@ -25,7 +25,7 @@ def post_profile():
         print(error)
         return render_template('profile.html', title='Error Occurred', form=form, error=error)
 
-    return redirect(profile_page)
+    return Response(profile_page, mimetype='text/html')
 
 
 @app.route('/', methods=['GET'])
