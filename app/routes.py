@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, redirect, request
 from app import app
 from app.forms import ProfileForm
 from profiling import connect_to_snowflake, get_profile_results
@@ -19,13 +19,13 @@ def post_profile():
         schema = req.get('schema')
         table = req.get('table')
         pd_df = connect_to_snowflake(username, password, account, warehouse, database, schema, table)
-        get_profile_results(pd_df)
+        profile_page = get_profile_results(pd_df)
 
-    except Exception as e:
-        print(e)
-        return render_template('profile.html', title='Error Occurred', form=form)
+    except Exception as error:
+        print(error)
+        return render_template('profile.html', title='Error Occurred', form=form, error=error)
 
-    return render_template('profile.html', title='Sign In', form=form)
+    return redirect(profile_page)
 
 
 @app.route('/', methods=['GET'])
@@ -33,4 +33,10 @@ def get_profile():
 
     form = ProfileForm()
 
-    return render_template('profile.html', title='Sign In', form=form)
+    return render_template('profile.html', title='Profiler', form=form)
+
+
+
+
+
+
