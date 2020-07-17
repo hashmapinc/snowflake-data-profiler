@@ -5,3 +5,4 @@
 profiler-venv
 my_data
 __pycache__
+*.pyc
