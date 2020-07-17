@@ -4,3 +4,4 @@
 .DS_Store
 profiler-venv
 my_data
+__pycache__
