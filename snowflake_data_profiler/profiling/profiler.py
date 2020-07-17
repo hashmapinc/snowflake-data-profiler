@@ -2,7 +2,6 @@ import pandas as pd
 from pandas_profiling import ProfileReport
 from snowflake import connector
 
-
 def file_to_df(file_name):
     if file_name.endswith('.csv'):
         df = pd.read_csv(file_name)
@@ -20,7 +19,6 @@ def file_to_df(file_name):
 
 
 def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfWarehouse, sfDatabase, sfSchema, sfTable):
-
     con = connector.connect(
         user=sfUser,
         password=sfPswd,
@@ -29,30 +27,23 @@ def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfWarehouse, sfDatabase, sfS
         database=sfDatabase,
         schema=sfSchema,
     )
-
     cur = con.cursor()
-
     cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable};')
-
     df = cur.fetch_pandas_all()
-
     return df
 
 
 def get_profile_results(data):
     profile = ProfileReport(data, title='Snowflake Data Profiler')
-
     p = profile.to_html()
-
     return p
 
 
-def main():
+def do_profile():
     pd_df = connect_to_snowflake()
-
     return get_profile_results(pd_df)
 
 
 if __name__ == "__main__":
-    main()
+    do_profile()
 
