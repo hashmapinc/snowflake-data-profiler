@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Enter Snowflake Information</h1>
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+        </p>
+        <p>
+            {{ form.account.label }}<br>
+            {{ form.account(size=32) }}
+        </p>
+        <p>
+            {{ form.warehouse.label }}<br>
+            {{ form.warehouse(size=32) }}
+        </p>
+        <p>
+            {{ form.database.label }}<br>
+            {{ form.database(size=32) }}
+        </p>
+        <p>
+            {{ form.schema.label }}<br>
+            {{ form.schema(size=32) }}
+        </p>
+        <p>
+            {{ form.table.label }}<br>
+            {{ form.table(size=32) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
