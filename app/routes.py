@@ -1,7 +1,7 @@
 from flask import render_template, request, Response
-from app import app
+from app.profiler-app import app
 from app.forms import ProfileForm
-from profiling import connect_to_snowflake, get_profile_results
+from app.profiling import connect_to_snowflake, get_profile_results
 
 
 @app.route('/', methods=['POST'])
