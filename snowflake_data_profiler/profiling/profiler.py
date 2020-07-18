@@ -17,7 +17,6 @@ def file_to_df(file_name):
         df = pd.read_sql(file_name)
     return df
 
-
 def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfWarehouse, sfDatabase, sfSchema, sfTable):
     con = connector.connect(
         user=sfUser,
@@ -32,18 +31,14 @@ def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfWarehouse, sfDatabase, sfS
     df = cur.fetch_pandas_all()
     return df
 
-
 def get_profile_results(data):
-    profile = ProfileReport(data, title='Snowflake Data Profiler')
+    profile = ProfileReport(data, title='Snowflake Data Profiler', progress_bar=False, minimal=True)
     p = profile.to_html()
     return p
-
 
 def do_profile():
     pd_df = connect_to_snowflake()
     return get_profile_results(pd_df)
 
-
 if __name__ == "__main__":
     do_profile()
-
