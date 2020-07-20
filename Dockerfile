@@ -1,11 +1,9 @@
 FROM python:3
 
-ENV FLASK_APP profiler-app.py
-
 EXPOSE 5000
 
-COPY app .
+COPY snowflake_data_profiler snowflake_data_profiler
 
-RUN python -m pip install --upgrade pip && pip install -r requirements.txt
+RUN cd snowflake_data_profiler && python -m pip install --upgrade pip && pip install -r requirements.txt
 
-ENTRYPOINT ["flask","run"]
+CMD ["python","-m", "snowflake_data_profiler.app"]

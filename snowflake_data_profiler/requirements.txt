@@ -1,0 +1,9 @@
+Flask-WTF==0.14.3
+Flask==1.1.2
+Jinja2==2.11.2
+pandas-profiling==2.8.0
+pandas==1.0.5
+pyarrow
+requests==2.23.0
+snowflake-connector-python==2.2.9
+WTForms==2.3.1
