@@ -3,12 +3,8 @@
 *.xlsx
 .DS_Store
 profiler-venv
-<<<<<<< HEAD
 my_data
 __pycache__
 *.pyc
 venv
 .vscode
-=======
-pandas_profiling1.html
->>>>>>> a285b051d4610818b15336957606c18342e2ab0e
