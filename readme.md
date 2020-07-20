@@ -1,4 +1,4 @@
-#Snowflake Data Profiler
+# Snowflake Data Profiler
 This repo holds the Snowflake Data Profiler tool. This tool allows you to quickly build live data profile reports against your Snowflake data warehouse.
 
 ## Building
