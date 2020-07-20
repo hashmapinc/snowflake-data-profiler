@@ -1,0 +1,7 @@
+.idea
+.DS_Store
+profiler-venv
+__pycache__
+*.pyc
+venv
+.vscode
