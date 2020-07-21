@@ -8,9 +8,9 @@
         {% endif %}
     </head>
     <body>
-        <div>Snowflake Data Profiler:
+        {% block content %}{% endblock %}
+        <div>
             <a href="{{ 'https://forms.gle/nYsWyXWstpLZcJmNA' }}">Feedback Form</a>
         </div>
-        {% block content %}{% endblock %}
     </body>
 </html>
