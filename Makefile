@@ -1,5 +1,5 @@
 devserver:
-	python -m python -m snowflake_data_profiler.app
+	python -m snowflake_data_profiler.app
 
 venv:
 	python3 -m venv venv && source ./venv/bin/activate && pip install --upgrade pip
