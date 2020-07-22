@@ -6,7 +6,7 @@ from snowflake_data_profiler.routes.default import bp as default_blueprint
 # Create app and wire up routes 
 #===========================================
 # create and configure app
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static', static_folder='static')
 app.config.from_object(Config)
 
 # wire up routes with blueprints 

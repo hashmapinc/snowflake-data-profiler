@@ -1,41 +1,152 @@
 <!DOCTYPE html>
-{% extends "base.html" %}
+<html lang="en" class="h-100">
 
-{% block content %}
-    <h1>Enter Snowflake Information</h1>
-    {% if error %}
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158371739-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-158371739-2');
+  </script>
+
+  <script>
+    (function () {
+
+      window.ldfdr = window.ldfdr || {};
+      (function (d, s, ss, fs) {
+        fs = d.getElementsByTagName(s)[0];
+
+        function ce(src) {
+          var cs = d.createElement(s);
+          cs.src = src;
+          setTimeout(function () { fs.parentNode.insertBefore(cs, fs) }, 1);
+        }
+
+        ce(ss);
+      })(document, 'script', 'https://sc.lfeeder.com/lftracker_v1_lAxoEaKW6dBaOYGd.js');
+    })();
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Snowflake Data Profiler by Hashmap</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+    .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+    .fa-anchor,.fa-coffee {font-size:200px}
+    input {margin-bottom: 20px}
+  </style>
+</head>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Snowflake Data Profiler by ... Hashmap</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+  <header class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="https://www.hashmapinc.com/" target="_blank">
+      <img src="/static/hashmap_banner_white.png" width="200px" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="mx-auto my-2 text-white">
+        <h3>Snowflake Data Profiler</h3>
+      </div>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#" target="_blank">How To Video</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" target="_blank">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback </a>
+        </li>
+<!--        <li class="nav-item">-->
+<!--          <button class="nav-item btn btn-primary ml-3" data-toggle="modal" data-target="#create-vis-modal">-->
+<!--            New Visualization-->
+<!--          </button>-->
+<!--        </li>-->
+      </ul>
+    </div>
+  </header>
+  <style>
+      .w3-margin {position: relative; top:-75px}
+  </style>
+  <header class="w3-container w3-blue w3-center" style="padding:190px 16px">
+  <h1 class="w3-margin w3-xxlarge">Enter your Snowflake information below to generate a profile of your table data:</h1>
+  {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}</p>
-    {% endif %}
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-        </p>
-        <p>
-            {{ form.account.label }}<br>
-            {{ form.account(size=32) }}
-        </p>
-        <p>
-            {{ form.warehouse.label }}<br>
-            {{ form.warehouse(size=32) }}
-        </p>
-        <p>
-            {{ form.database.label }}<br>
-            {{ form.database(size=32) }}
-        </p>
-        <p>
-            {{ form.schema.label }}<br>
-            {{ form.schema(size=32) }}
-        </p>
-        <p>
-            {{ form.table.label }}<br>
-            {{ form.table(size=32) }}
-        </p>
-        <p>{{ form.submit() }}</p>
+  {% endif %}
+  <form class="pure-form pure-form-centered" action="" method="post" novalidate>
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="aligned-name"></label>
+                <input size="25" name="username" type="text" id="aligned-name" placeholder="Snowflake Username" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-password"></label>
+                <input size="25" name="password" type="password" id="aligned-password" placeholder="Snowflake Password" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-account"></label>
+                <input size="25" name="account" type="text" id="aligned-account" placeholder="Snowflake Account" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-warehouse"></label>
+                <input size="25" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake Warehouse" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-database"></label>
+                <input size="25" name="database" type="text" id="aligned-database" placeholder="Snowflake Database" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-schema"></label>
+                <input size="25" name="schema" type="text" id="aligned-schema" placeholder="Snowflake Schema" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-table"></label>
+                <input size="25" name="table" type="text" id="aligned-table" placeholder="Snowflake Table" />
+            </div>
+            <div class="pure-controls">
+                <style scoped="">
+                  .button-large {
+                      font-size: 130%; background: white;
+                  }
+                </style>
+                <button type="submit" class="button-large pure-button">Create Profile</button>
+            </div>
+        </fieldset>
     </form>
-{% endblock %}
+</header>
+
+
+
+  <!-- Start of HubSpot Embed Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
+  <!-- End of HubSpot Embed Code -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>
