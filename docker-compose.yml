@@ -1,0 +1,17 @@
+version: "3.1"
+services:
+
+  nginx:
+    depends_on: 
+      - snowflake_data_profiler
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./certs:/etc/nginx/certs
+    ports:
+      - 80:80
+      - 443:443
+
+  snowflake_data_profiler:
+    image: randypitcherii/snowflake_data_profiler
+    container_name: snowflake_data_profiler

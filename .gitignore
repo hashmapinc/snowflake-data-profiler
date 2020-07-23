@@ -8,3 +8,7 @@ __pycache__
 *.pyc
 venv
 .vscode
+<<<<<<< HEAD
+certs
+=======
+>>>>>>> master
