@@ -31,33 +31,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-    body,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: "Lato", sans-serif
-    }
-
-    .w3-bar,
-    h1,
-    button {
-      font-family: "Montserrat", sans-serif
-    }
-
-    .fa-anchor,
-    .fa-coffee {
-      font-size: 200px
-    }
-
-    input {
-      margin-bottom: 20px;
-      background: rgb(239, 238, 239);
-    }
-  </style>
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles/main.css') }}">
 </head>
 
 <head>
@@ -89,11 +63,6 @@
         <li class="nav-item">
           <a class="nav-link" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback </a>
         </li>
-        <!--        <li class="nav-item">-->
-        <!--          <button class="nav-item btn btn-primary ml-3" data-toggle="modal" data-target="#create-vis-modal">-->
-        <!--            New Visualization-->
-        <!--          </button>-->
-        <!--        </li>-->
       </ul>
     </div>
   </header>
@@ -114,7 +83,7 @@
       top: -10px
     }
   </style>
-  <header class="w3-container w3-center" style="padding:180px 16px;">
+  <div class="w3-container w3-center" style="padding:180px 16px;">
     <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of your Snowflake table data</strong></h1>
     <p class="note">Enter your Snowflake information below:</p>
     {% if error %}
@@ -156,9 +125,7 @@
         </div>
       </fieldset>
     </form>
-  </header>
-
-
+  </div>
 
   <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
