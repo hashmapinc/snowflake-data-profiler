@@ -45,7 +45,7 @@
     body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
     .fa-anchor,.fa-coffee {font-size:200px}
-    input {margin-bottom: 20px}
+    input {margin-bottom: 20px; background: rgb(239,238,239);}
   </style>
 </head>
 
@@ -91,49 +91,52 @@
   </header>
   <style>
       .w3-margin {position: relative; top:-75px}
+      p {font-size: 150%; position: relative; top:-75px}
+      label {position: relative; top:-10px}
   </style>
-  <header class="w3-container w3-blue w3-center" style="padding:190px 16px">
-  <h1 class="w3-margin w3-xxlarge">Enter your Snowflake information below to generate a profile of your table data:</h1>
+  <header class="w3-container w3-center" style="padding:180px 16px;">
+      <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of your Snowflake table data</strong></h1>
+      <p class="note">Enter your Snowflake information below:</p>
   {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}</p>
   {% endif %}
   <form class="pure-form pure-form-centered" action="" method="post" novalidate>
         <fieldset>
             <div class="pure-control-group">
-                <label for="aligned-name"></label>
-                <input size="25" name="username" type="text" id="aligned-name" placeholder="Snowflake Username" />
+                <label for="aligned-name">Username:</label>
+                <input size="40" name="username" type="text" id="aligned-name" placeholder="Snowflake Username" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-password"></label>
-                <input size="25" name="password" type="password" id="aligned-password" placeholder="Snowflake Password" />
+                <label for="aligned-password">Password:</label>
+                <input size="40" name="password" type="password" id="aligned-password" placeholder="Snowflake Password" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-account"></label>
-                <input size="25" name="account" type="text" id="aligned-account" placeholder="Snowflake Account" />
+                <label for="aligned-account">Account:</label>
+                <input size="40" name="account" type="text" id="aligned-account" placeholder="Snowflake Account" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-warehouse"></label>
-                <input size="25" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake Warehouse" />
+                <label for="aligned-warehouse">Warehouse:</label>
+                <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake Warehouse" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-database"></label>
-                <input size="25" name="database" type="text" id="aligned-database" placeholder="Snowflake Database" />
+                <label for="aligned-database">Database:</label>
+                <input size="40" name="database" type="text" id="aligned-database" placeholder="Snowflake Database" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-schema"></label>
-                <input size="25" name="schema" type="text" id="aligned-schema" placeholder="Snowflake Schema" />
+                <label for="aligned-schema">Schema:</label>
+                <input size="40" name="schema" type="text" id="aligned-schema" placeholder="Snowflake Schema" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-table"></label>
-                <input size="25" name="table" type="text" id="aligned-table" placeholder="Snowflake Table" />
+                <label for="aligned-table">Table:</label>
+                <input size="40" name="table" type="text" id="aligned-table" placeholder="Snowflake Table" />
             </div>
             <div class="pure-controls">
                 <style scoped="">
                   .button-large {
-                      font-size: 130%; background: white;
+                      font-size: 110%; background: rgb(70,172,236); color: rgb(255,255,255); border-radius: 30px;
                   }
                 </style>
-                <button type="submit" class="button-large pure-button">Create Profile</button>
+                <button type="submit" class="button-large pure-button">Create data profile</button>
             </div>
         </fieldset>
     </form>
