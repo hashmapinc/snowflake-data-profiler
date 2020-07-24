@@ -8,7 +8,7 @@ def input_error(error):
     elif '002003' and 'Object' in error:
         return 'Snowflake table is not authorized or does not exist'
     elif '250001' in error:
-        return 'Incorrect Snowflake username, password, or account'
+        return 'Please enter a valid Snowflake username, password, or account'
     elif '251006' in error:
         return 'Please enter a value for Snowflake password'
     elif '251005' in error:

@@ -67,22 +67,61 @@
     </div>
   </header>
   <style>
-<<<<<<< HEAD
+
     .w3-margin {
       position: relative;
-      top: -75px;
+      top: -55px;
     }
 
     p {
       font-size: 150%;
       position: relative;
-      top: -25px
+      top: -55px
     }
 
     label {
       position: relative;
       top: -10px
     }
+
+    input {
+        position: relative;
+        top: -20px;
+     }
+
+     p1 {
+        position: relative;
+        top: -20px;
+      }
+
+     .loader {
+          display: none;
+          position: absolute;
+          left: 52.5%;
+          top: 90%;
+          z-index: 1;
+          margin: -75px 0 0 -75px;
+          border: 8px solid #f3f3f3;
+          border-color: rgb(239, 238, 239);
+          border-radius: 50%;
+          border-top: 8px solid #3498db;
+          width: 60px;
+          height: 60px;
+          color: rgb(70,172,236);
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+        }
+
+    /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+    @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
   </style>
   <header class="w3-container w3-center" style="padding:150px 16px;">
       <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of your Snowflake table data</strong></h1>
@@ -124,16 +163,24 @@
                       background: rgb(70,172,236);
                       color: rgb(255,255,255);
                       border-radius: 30px;
+                      position: relative;
+                      top: -20px;
                   }
                 </style>
-                <button type="submit" class="button-large pure-button">Create data profile</button>
+                <button id="submit_button" type="submit" class="button-large pure-button" onclick="loading()">Create data profile</button>
             </div>
         </fieldset>
     </form>
   {% if error %}
-        <p1 class="error">{{ error }}</p1>
+    <p1 class="error">{{ error }}</p1>
   {% endif %}
+  <div id="loading" class="loader"></div>
 </header>
+  <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+        }
+// ]]></script>
 
   <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
