@@ -20,13 +20,13 @@ jobs:
       - run:
           name: Push deploy artifacts to the server
           command: |
-            ssh $EC2_TARGET "mkdir -p $EC2_DEPLOY_PATH/nginx/" 
-            scp ./nginx/nginx.conf $EC2_TARGET:$EC2_DEPLOY_PATH/nginx/nginx.conf
-            scp ./docker-compose.yml $EC2_TARGET:$EC2_DEPLOY_PATH/docker-compose.yml
+            ssh -o StrictHostKeyChecking=no $EC2_TARGET "mkdir -p $EC2_DEPLOY_PATH/nginx/" 
+            scp -o StrictHostKeyChecking=no ./nginx/nginx.conf $EC2_TARGET:$EC2_DEPLOY_PATH/nginx/nginx.conf
+            scp -o StrictHostKeyChecking=no ./docker-compose.yml $EC2_TARGET:$EC2_DEPLOY_PATH/docker-compose.yml
       - run:
           name: Push deploy artifacts to the server
           command: |
-            ssh $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose up -d"
+            ssh -o StrictHostKeyChecking=no $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose up -d"
 
 
 workflows:
