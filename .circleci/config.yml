@@ -24,8 +24,9 @@ jobs:
             scp -o StrictHostKeyChecking=no ./nginx/nginx.conf $EC2_TARGET:$EC2_DEPLOY_PATH/nginx/nginx.conf
             scp -o StrictHostKeyChecking=no ./docker-compose.yml $EC2_TARGET:$EC2_DEPLOY_PATH/docker-compose.yml
       - run:
-          name: Push deploy artifacts to the server
+          name: Update the application on the server with the latest profiler container
           command: |
+            ssh -o StrictHostKeyChecking=no $EC2_TARGET "docker image prune -f"
             ssh -o StrictHostKeyChecking=no $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose down && docker-compose up -d"
 
 workflows:
@@ -36,5 +37,8 @@ workflows:
           docker-password: DOCKERHUB_KEY
           tag: latest,$CIRCLE_SHA1
       - deploy_profiler:
+          filters:
+            branches:
+              only: master
           requires:
             - docker/publish
