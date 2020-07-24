@@ -4,9 +4,10 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.3.0
 
-# Orchestrate or schedule a set of jobs
+
 workflows:
     jobs:
-      - docker/publish:
+      - 
+        docker/publish:
           image: randypitcherii/snowflake_data_profiler
           docker-password: DOCKERHUB_KEY
