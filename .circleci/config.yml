@@ -7,7 +7,6 @@ orbs:
 
 workflows:
     jobs:
-      - 
-        docker/publish:
+      docker/publish:
           image: randypitcherii/snowflake_data_profiler
           docker-password: DOCKERHUB_KEY
