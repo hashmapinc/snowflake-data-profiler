@@ -28,7 +28,6 @@ jobs:
           command: |
             ssh -o StrictHostKeyChecking=no $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose down && docker-compose up -d"
 
-
 workflows:
   build_and_deploy:
     jobs:
@@ -37,8 +36,5 @@ workflows:
           docker-password: DOCKERHUB_KEY
           tag: latest,$CIRCLE_SHA1
       - deploy_profiler:
-          filters:
-            branches:
-              only: master
           requires:
             - docker/publish
