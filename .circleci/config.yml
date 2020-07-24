@@ -4,10 +4,38 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.3.0
 
+jobs:
+  deploy_profiler:
+    docker: 
+      - image: cimg/base:2020.01
+    environment:
+      EC2_TARGET: ec2-user@184.72.138.13
+      EC2_DEPLOY_PATH: ~/profiler.snowflakeinspector.com
+
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "84:0b:79:75:44:b5:13:c9:d3:d6:c5:3e:bd:bb:81:99"
+      - checkout
+      - run:
+          name: Push deploy artifacts to the server
+          command: |
+            ssh $EC2_TARGET "mkdir -p $EC2_DEPLOY_PATH/nginx/" 
+            scp ./nginx/nginx.conf $EC2_TARGET:$EC2_DEPLOY_PATH/nginx/nginx.conf
+            scp ./docker-compose.yml $EC2_TARGET:$EC2_DEPLOY_PATH/docker-compose.yml
+      - run:
+          name: Push deploy artifacts to the server
+          command: |
+            ssh $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose up -d"
+
+
 workflows:
-  docker_publish:
+  build_and_deploy:
     jobs:
       - docker/publish:
           image: randypitcherii/snowflake_data_profiler
           docker-password: DOCKERHUB_KEY
           tag: latest,$CIRCLE_SHA1
+      - deploy_profiler:
+          requires:
+            - docker/publish
