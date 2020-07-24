@@ -1,3 +1,5 @@
+![CircleCI](https://img.shields.io/circleci/build/github/hashmapinc/snowflake-data-profiler/master?label=CircleCI%20Master%20Build)
+
 # Snowflake Data Profiler
 This repo holds the Snowflake Data Profiler tool. This tool allows you to quickly build live data profile reports against your Snowflake data warehouse.
 
