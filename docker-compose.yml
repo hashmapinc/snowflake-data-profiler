@@ -1,6 +1,5 @@
 version: "3.1"
 services:
-
   nginx:
     depends_on: 
       - snowflake_data_profiler
@@ -13,5 +12,5 @@ services:
       - 443:443
 
   snowflake_data_profiler:
-    image: randypitcherii/snowflake_data_profiler
+    image: randypitcherii/snowflake_data_profiler:latest
     container_name: snowflake_data_profiler

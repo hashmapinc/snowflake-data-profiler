@@ -58,7 +58,7 @@
 
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="#" target="_blank">Contact Us</a>
+          <a class="nav-link" href="https://www.hashmapinc.com/reach-out" target="_blank">Contact Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback </a>
@@ -67,65 +67,124 @@
     </div>
   </header>
   <style>
+
     .w3-margin {
       position: relative;
-      top: -75px
+      top: -55px;
     }
 
     p {
       font-size: 150%;
       position: relative;
-      top: -75px
+      top: -55px
     }
 
     label {
       position: relative;
       top: -10px
     }
+
+    input {
+        position: relative;
+        top: -20px;
+     }
+
+     p1 {
+        position: relative;
+        top: -20px;
+      }
+
+     .loader {
+          display: none;
+          position: absolute;
+          left: 52.5%;
+          top: 90%;
+          z-index: 1;
+          margin: -75px 0 0 -75px;
+          border: 8px solid #f3f3f3;
+          border-color: rgb(239, 238, 239);
+          border-radius: 50%;
+          border-top: 8px solid #3498db;
+          width: 60px;
+          height: 60px;
+          color: rgb(70,172,236);
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+        }
+
+    /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+
+    @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
   </style>
-  <div class="w3-container w3-center" style="padding:180px 16px;">
-    <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of your Snowflake table data</strong></h1>
-    <p class="note">Enter your Snowflake information below:</p>
-    {% if error %}
-    <p class="error"><strong>Error:</strong> {{ error }}</p>
-    {% endif %}
-    <form class="pure-form pure-form-centered" action="" method="post" novalidate>
-      <fieldset>
-        <div class="pure-control-group">
-          <input size="40" name="username" type="text" id="aligned-name" placeholder="Snowflake Username" />
-        </div>
-        <div class="pure-control-group">
-          <input size="40" name="password" type="password" id="aligned-password" placeholder="Snowflake Password" />
-        </div>
-        <div class="pure-control-group">
-          <input size="40" name="account" type="text" id="aligned-account" placeholder="Snowflake Account" />
-        </div>
-        <div class="pure-control-group">
-          <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake Warehouse" />
-        </div>
-        <div class="pure-control-group">
-          <input size="40" name="database" type="text" id="aligned-database" placeholder="Snowflake Database" />
-        </div>
-        <div class="pure-control-group">
-          <input size="40" name="schema" type="text" id="aligned-schema" placeholder="Snowflake Schema" />
-        </div>
-        <div class="pure-control-group">
-          <input size="40" name="table" type="text" id="aligned-table" placeholder="Snowflake Table" />
-        </div>
-        <div class="pure-controls">
-          <style scoped="">
-            .button-large {
-              font-size: 110%;
-              background: rgb(70, 172, 236);
-              color: rgb(255, 255, 255);
-              border-radius: 30px;
-            }
-          </style>
-          <button type="submit" class="button-large pure-button">Create data profile</button>
-        </div>
-      </fieldset>
+  <header class="w3-container w3-center" style="padding:150px 16px;">
+      <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of the first 1 million rows of one of your Snowflake tables</strong></h1>
+      <p class="note">Enter your Snowflake information below:</p>
+  <form class="pure-form pure-form-centered" action="" method="post" novalidate>
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="aligned-name"></label>
+                <input size="40" name="username" type="text" id="aligned-name" placeholder="Snowflake username" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-password"></label>
+                <input size="40" name="password" type="password" id="aligned-password" placeholder="Snowflake password" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-account"></label>
+                <input size="40" name="account" type="text" id="aligned-account" placeholder="Snowflake account" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-account"></label>
+                <input size="40" name="role" type="text" id="aligned-role" placeholder="Snowflake role (optional)" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-warehouse"></label>
+                <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake warehouse (optional)" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-database"></label>
+                <input size="40" name="database" type="text" id="aligned-database" placeholder="Snowflake database" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-schema"></label>
+                <input size="40" name="schema" type="text" id="aligned-schema" placeholder="Snowflake schema" />
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-table"></label>
+                <input size="40" name="table" type="text" id="aligned-table" placeholder="Snowflake table" />
+            </div>
+            <div class="pure-controls">
+                <style scoped="">
+                  .button-large {
+                      font-size: 110%;
+                      background: rgb(70,172,236);
+                      color: rgb(255,255,255);
+                      border-radius: 30px;
+                      position: relative;
+                      top: -20px;
+                  }
+                </style>
+                <button id="submit_button" type="submit" class="button-large pure-button" onclick="loading()">Create data profile</button>
+            </div>
+        </fieldset>
     </form>
-  </div>
+  {% if error %}
+    <p1 class="error">{{ error }}</p1>
+  {% endif %}
+  <div id="loading" class="loader"></div>
+</header>
+  <script type="text/javascript">// <![CDATA[
+        function loading(){
+            $("#loading").show();
+        }
+// ]]></script>
 
   <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
