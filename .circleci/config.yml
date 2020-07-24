@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Push deploy artifacts to the server
           command: |
-            ssh -o StrictHostKeyChecking=no $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose up -d"
+            ssh -o StrictHostKeyChecking=no $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose down && docker-compose up -d"
 
 
 workflows:
@@ -37,5 +37,8 @@ workflows:
           docker-password: DOCKERHUB_KEY
           tag: latest,$CIRCLE_SHA1
       - deploy_profiler:
+          filters:
+            branches:
+              only: master
           requires:
             - docker/publish
