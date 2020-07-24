@@ -124,7 +124,7 @@
         }
   </style>
   <header class="w3-container w3-center" style="padding:150px 16px;">
-      <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of your Snowflake table data</strong></h1>
+      <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of the first 1 million rows of one of your Snowflake tables</strong></h1>
       <p class="note">Enter your Snowflake information below:</p>
   <form class="pure-form pure-form-centered" action="" method="post" novalidate>
         <fieldset>
@@ -141,8 +141,12 @@
                 <input size="40" name="account" type="text" id="aligned-account" placeholder="Snowflake account" />
             </div>
             <div class="pure-control-group">
+                <label for="aligned-account"></label>
+                <input size="40" name="role" type="text" id="aligned-role" placeholder="Snowflake role (optional)" />
+            </div>
+            <div class="pure-control-group">
                 <label for="aligned-warehouse"></label>
-                <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake warehouse" />
+                <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake warehouse (optional)" />
             </div>
             <div class="pure-control-group">
                 <label for="aligned-database"></label>

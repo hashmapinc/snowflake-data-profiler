@@ -22,14 +22,17 @@ def post_profile():
         username = req.get('username')
         password = req.get('password')
         account = req.get('account')
+        role = req.get('role')
         warehouse = req.get('warehouse')
         database = req.get('database')
         schema = req.get('schema')
         table = req.get('table')
-        pd_df = connect_to_snowflake(username, password, account, warehouse, database, schema, table)
+        pd_df = connect_to_snowflake(username, password, account, database, schema, table, warehouse, role)
         profile_page = get_profile_results(pd_df)
 
+
     except Exception as e:
+        print(e)
         error = input_error(e)
         return render_template('profile.html', title='Error Occurred', error=error)
 
