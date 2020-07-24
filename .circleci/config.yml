@@ -6,6 +6,7 @@ orbs:
 
 # Orchestrate or schedule a set of jobs
 workflows:
-  build:
-  deploy_container:
-  deploy_profiler_site:
+    jobs:
+      - docker/publish:
+          image: randypitcherii/snowflake_data_profiler
+          docker-password: DOCKERHUB_KEY
