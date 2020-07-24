@@ -1,5 +1,6 @@
 from flask import render_template, request, Response, Blueprint
 from snowflake_data_profiler.profiling.profiler import connect_to_snowflake, get_profile_results
+from snowflake_data_profiler.error_handling.error_handler import input_error
 
 #==============================================================================
 # default API 
@@ -28,8 +29,8 @@ def post_profile():
         pd_df = connect_to_snowflake(username, password, account, warehouse, database, schema, table)
         profile_page = get_profile_results(pd_df)
 
-    except Exception as error:
-        print(error)
+    except Exception as e:
+        error = input_error(e)
         return render_template('profile.html', title='Error Occurred', error=error)
 
     return Response(profile_page, mimetype='text/html')

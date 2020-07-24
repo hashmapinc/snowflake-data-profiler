@@ -90,45 +90,42 @@
     </div>
   </header>
   <style>
-      .w3-margin {position: relative; top:-75px}
+      .w3-margin {position: relative; top:-70px}
       p {font-size: 150%; position: relative; top:-75px}
-      label {position: relative; top:-10px}
+      p1 {font-size: 120%; position: relative; top:-5px;}
   </style>
-  <header class="w3-container w3-center" style="padding:180px 16px;">
+  <header class="w3-container w3-center" style="padding:170px 16px;">
       <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of your Snowflake table data</strong></h1>
       <p class="note">Enter your Snowflake information below:</p>
-  {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}</p>
-  {% endif %}
   <form class="pure-form pure-form-centered" action="" method="post" novalidate>
         <fieldset>
             <div class="pure-control-group">
-                <label for="aligned-name">Username:</label>
-                <input size="40" name="username" type="text" id="aligned-name" placeholder="Snowflake Username" />
+                <label for="aligned-name"></label>
+                <input size="40" name="username" type="text" id="aligned-name" placeholder="Snowflake username" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-password">Password:</label>
-                <input size="40" name="password" type="password" id="aligned-password" placeholder="Snowflake Password" />
+                <label for="aligned-password"></label>
+                <input size="40" name="password" type="password" id="aligned-password" placeholder="Snowflake password" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-account">Account:</label>
-                <input size="40" name="account" type="text" id="aligned-account" placeholder="Snowflake Account" />
+                <label for="aligned-account"></label>
+                <input size="40" name="account" type="text" id="aligned-account" placeholder="Snowflake account" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-warehouse">Warehouse:</label>
-                <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake Warehouse" />
+                <label for="aligned-warehouse"></label>
+                <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake warehouse" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-database">Database:</label>
-                <input size="40" name="database" type="text" id="aligned-database" placeholder="Snowflake Database" />
+                <label for="aligned-database"></label>
+                <input size="40" name="database" type="text" id="aligned-database" placeholder="Snowflake database" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-schema">Schema:</label>
-                <input size="40" name="schema" type="text" id="aligned-schema" placeholder="Snowflake Schema" />
+                <label for="aligned-schema"></label>
+                <input size="40" name="schema" type="text" id="aligned-schema" placeholder="Snowflake schema" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-table">Table:</label>
-                <input size="40" name="table" type="text" id="aligned-table" placeholder="Snowflake Table" />
+                <label for="aligned-table"></label>
+                <input size="40" name="table" type="text" id="aligned-table" placeholder="Snowflake table" />
             </div>
             <div class="pure-controls">
                 <style scoped="">
@@ -140,6 +137,9 @@
             </div>
         </fieldset>
     </form>
+  {% if error %}
+        <p1 class="error">{{ error }}</p1>
+  {% endif %}
 </header>
 
 
