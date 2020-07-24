@@ -4,11 +4,6 @@ version: 2.1
 orbs:
   docker: circleci/docker@1.3.0
 
-jobs:
-  deploy_application:
-    context:
-      image: cimg/base:2020.01
-
 workflows:
   docker_publish:
     jobs:
