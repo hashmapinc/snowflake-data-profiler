@@ -27,7 +27,7 @@ def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTabl
         role=sfRole,
     )
     cur = con.cursor()
-    if sfWarehouse is not None:
+    if sfWarehouse:
         cur.execute(f'use warehouse {sfWarehouse};')
 
     cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable} limit 10000;')
