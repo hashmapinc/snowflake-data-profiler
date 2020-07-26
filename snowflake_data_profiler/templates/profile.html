@@ -20,6 +20,16 @@
     })();
   </script>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158371739-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-158371739-3');
+  </script>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Snowflake Data Profiler by Hashmap</title>
@@ -32,12 +42,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles/main.css') }}">
-</head>
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Snowflake Data Profiler by ... Hashmap</title>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -58,7 +62,7 @@
 
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="https://www.hashmapinc.com/reach-out" target="_blank">Contact Us</a>
+          <a class="nav-link" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout" target="_blank">Contact Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback </a>
@@ -66,65 +70,8 @@
       </ul>
     </div>
   </header>
-  <style>
-
-    .w3-margin {
-      position: relative;
-      top: -55px;
-    }
-
-    p {
-      font-size: 150%;
-      position: relative;
-      top: -55px
-    }
-
-    label {
-      position: relative;
-      top: -10px
-    }
-
-    input {
-        position: relative;
-        top: -20px;
-     }
-
-     p1 {
-        position: relative;
-        top: -20px;
-      }
-
-     .loader {
-          display: none;
-          position: absolute;
-          left: 52.5%;
-          top: 90%;
-          z-index: 1;
-          margin: -75px 0 0 -75px;
-          border: 8px solid #f3f3f3;
-          border-color: rgb(239, 238, 239);
-          border-radius: 50%;
-          border-top: 8px solid #3498db;
-          width: 60px;
-          height: 60px;
-          color: rgb(70,172,236);
-          -webkit-animation: spin 2s linear infinite; /* Safari */
-          animation: spin 2s linear infinite;
-        }
-
-    /* Safari */
-        @-webkit-keyframes spin {
-          0% { -webkit-transform: rotate(0deg); }
-          100% { -webkit-transform: rotate(360deg); }
-        }
-
-    @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-  </style>
   <header class="w3-container w3-center" style="padding:150px 16px;">
-      <h1 class="w3-margin w3-xxlarge"><strong>Generate a profile of the first 1 million rows of one of your Snowflake tables</strong></h1>
+      <h1 class="w3-margin w3-xxlarge"><strong>Generate a data profile of the first 10K rows of one of your Snowflake tables</strong></h1>
       <p class="note">Enter your Snowflake information below:</p>
   <form class="pure-form pure-form-centered" action="" method="post" novalidate>
         <fieldset>

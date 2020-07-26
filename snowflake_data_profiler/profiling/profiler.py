@@ -18,7 +18,6 @@ def file_to_df(file_name):
     return df
 
 def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
-    print(f'sfWarehouse: {sfWarehouse}')
     con = connector.connect(
         user=sfUser,
         password=sfPswd,
@@ -31,7 +30,7 @@ def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTabl
     if sfWarehouse is not None:
         cur.execute(f'use warehouse {sfWarehouse};')
 
-    cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable} limit 1000000;')
+    cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable} limit 10000;')
     df = cur.fetch_pandas_all()
     return df
 

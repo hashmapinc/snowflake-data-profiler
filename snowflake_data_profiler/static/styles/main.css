@@ -19,4 +19,67 @@ input {
   color: red;
 }
 
+.w3-margin {
+  position: relative;
+  top: -55px;
+}
 
+p {
+  font-size: 150%;
+  position: relative;
+  top: -55px
+}
+
+label {
+  position: relative;
+  top: -10px
+}
+
+input {
+  position: relative;
+  top: -20px;
+}
+
+p1 {
+  position: relative;
+  top: -20px;
+}
+
+.loader {
+  display: none;
+  position: absolute;
+  left: 52.5%;
+  top: 90%;
+  z-index: 1;
+  margin: -75px 0 0 -75px;
+  border: 8px solid #f3f3f3;
+  border-color: rgb(239, 238, 239);
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 60px;
+  height: 60px;
+  color: rgb(70, 172, 236);
+  -webkit-animation: spin 2s linear infinite;
+  /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
