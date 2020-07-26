@@ -18,7 +18,6 @@ def file_to_df(file_name):
     return df
 
 def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
-    print(f'sfWarehouse: {sfWarehouse}')
     con = connector.connect(
         user=sfUser,
         password=sfPswd,
@@ -28,16 +27,16 @@ def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTabl
         role=sfRole,
     )
     cur = con.cursor()
-    if sfWarehouse is not None:
+    if sfWarehouse:
         cur.execute(f'use warehouse {sfWarehouse};')
 
-    cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable} limit 1000000;')
+    cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable} limit 10000;')
     df = cur.fetch_pandas_all()
     return df
 
 def get_profile_results(data):
     profile = ProfileReport(data, title='Snowflake Data Profiler', progress_bar=False, minimal=True)
-    p = profile.to_html()
+    p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
     return p
 
 def do_profile():

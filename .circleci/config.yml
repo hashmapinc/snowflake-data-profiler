@@ -36,6 +36,9 @@ workflows:
           image: randypitcherii/snowflake_data_profiler
           docker-password: DOCKERHUB_KEY
           tag: latest,$CIRCLE_SHA1
+          filters:
+            branches:
+              ignore: master
       - deploy_profiler:
           filters:
             branches:
