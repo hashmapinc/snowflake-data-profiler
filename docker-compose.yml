@@ -4,9 +4,7 @@ services:
     depends_on: 
       - snowflake_data_profiler
     image: nginx
-    deploy:
-      restart_policy:
-        condition: always
+    restart: always
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./certs:/etc/nginx/certs
@@ -17,6 +15,4 @@ services:
   snowflake_data_profiler:
     image: randypitcherii/snowflake_data_profiler:latest
     container_name: snowflake_data_profiler
-    deploy:
-      restart_policy:
-        condition: always
+    restart: always
