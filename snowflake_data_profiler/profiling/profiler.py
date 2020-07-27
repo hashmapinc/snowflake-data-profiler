@@ -35,7 +35,7 @@ def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTabl
     return df
 
 def get_profile_results(data):
-    profile = ProfileReport(data, title='Snowflake Data Profiler', progress_bar=False, minimal=True)
+    profile = ProfileReport(data, title='Snowflake Data Profiler from Hashmap', progress_bar=False, explorative=True)
     p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
     return p
 
