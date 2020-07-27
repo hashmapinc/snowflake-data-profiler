@@ -6,4 +6,4 @@ COPY snowflake_data_profiler snowflake_data_profiler
 
 RUN cd snowflake_data_profiler && python -m pip install --upgrade pip && pip install -r requirements.txt
 
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--timeout", "300", "--workers=5", "snowflake_data_profiler.wsgi:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--timeout", "3600", "--workers=5", "snowflake_data_profiler.wsgi:app"]
