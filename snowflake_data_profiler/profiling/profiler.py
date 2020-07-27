@@ -17,7 +17,11 @@ def file_to_df(file_name):
         df = pd.read_sql(file_name)
     return df
 
-def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
+def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
+    if '.snowflakecomputing.com' in sfURL:
+        sfAccount = sfURL.split('://')[1].split('.snowflakecomputing.com')[0]
+    else:
+        sfAccount = sfURL
     con = connector.connect(
         user=sfUser,
         password=sfPswd,

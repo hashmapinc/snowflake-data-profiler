@@ -31,7 +31,7 @@
   </script>
 
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
   <title>Snowflake Data Profiler by Hashmap</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -84,11 +84,11 @@
                 <input size="40" name="password" type="password" id="aligned-password" placeholder="Snowflake password" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-account"></label>
-                <input size="40" name="account" type="text" id="aligned-account" placeholder="Snowflake account" />
+                <label for="aligned-url"></label>
+                <input size="40" name="url" type="text" id="aligned-url" placeholder="Snowflake URL" />
             </div>
             <div class="pure-control-group">
-                <label for="aligned-account"></label>
+                <label for="aligned-role"></label>
                 <input size="40" name="role" type="text" id="aligned-role" placeholder="Snowflake role (optional)" />
             </div>
             <div class="pure-control-group">
@@ -122,9 +122,9 @@
             </div>
         </fieldset>
     </form>
-  {% if error %}
-    <p1 class="error">{{ error }}</p1>
-  {% endif %}
+    {% if error %}
+        <p1 class="error">{{ error }}</p1>
+    {% endif %}
   <div id="loading" class="loader"></div>
 </header>
   <script type="text/javascript">// <![CDATA[

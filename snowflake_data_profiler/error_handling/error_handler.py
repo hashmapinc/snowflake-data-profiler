@@ -3,6 +3,8 @@ def input_error(error):
     print(error)
     if '002003' in error and 'Database' in error:
         return 'Snowflake database is not authorized or does not exist'
+    elif 'list index out of range' in error:
+        return 'Please enter a value for Snowflake URL'
     elif '002003' in error and 'Schema' in error:
         return 'Snowflake schema is not authorized or does not exist'
     elif '002003' in error and 'Object' in error:
