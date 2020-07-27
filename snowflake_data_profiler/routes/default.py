@@ -20,13 +20,13 @@ def post_profile():
         req       = request.form
         username  = req.get('username')
         password  = req.get('password')
-        account   = req.get('account')
+        url       = req.get('url')
         role      = req.get('role')
         warehouse = req.get('warehouse')
         database  = req.get('database')
         schema    = req.get('schema')
         table     = req.get('table')
-        pd_df = connect_to_snowflake(username, password, account, database, schema, table, warehouse, role)
+        pd_df = connect_to_snowflake(username, password, url, database, schema, table, warehouse, role)
         profile_page = get_profile_results(pd_df)
 
     except Exception as e:

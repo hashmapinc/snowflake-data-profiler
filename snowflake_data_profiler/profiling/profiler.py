@@ -2,6 +2,19 @@ import pandas as pd
 from pandas_profiling import ProfileReport
 from snowflake import connector
 
+def get_snowflake_account_name(sfURL):
+  # check if this is a url or already is an account name
+  if '.snowflakecomputing.com' not in sfURL:
+    return sfURL # assume that without the domain, this is already an account name
+  
+  # extract the http(s):// if it exists
+  stripped_url = sfURL.split('://')[1] if '://' in sfURL else sfURL
+
+  # pull out the account name now that we have the stripped url
+  account_name = stripped_url.split('.snowflakecomputing.com')[0]
+  return account_name
+
+
 def file_to_df(file_name):
     if file_name.endswith('.csv'):
         df = pd.read_csv(file_name)
@@ -17,7 +30,9 @@ def file_to_df(file_name):
         df = pd.read_sql(file_name)
     return df
 
-def connect_to_snowflake(sfUser, sfPswd, sfAccount, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
+def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
+    sfAccount = get_snowflake_account_name(sfURL)
+    
     con = connector.connect(
         user=sfUser,
         password=sfPswd,

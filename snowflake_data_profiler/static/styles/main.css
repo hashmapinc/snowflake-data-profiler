@@ -17,6 +17,8 @@ input {
 
 .error {
   color: red;
+  position: relative;
+  top: -20px;
 }
 
 .w3-margin {
@@ -40,16 +42,11 @@ input {
   top: -20px;
 }
 
-p1 {
-  position: relative;
-  top: -20px;
-}
-
 .loader {
   display: none;
   position: absolute;
   left: 52.5%;
-  top: 90%;
+  top: 96%;
   z-index: 1;
   margin: -75px 0 0 -75px;
   border: 8px solid #f3f3f3;
