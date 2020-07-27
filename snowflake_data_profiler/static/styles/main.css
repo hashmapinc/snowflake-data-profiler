@@ -1,47 +1,17 @@
-body, h1, h2, h3, h4, h5, h6 {
+* {
   font-family: "Lato", sans-serif
 }
 
-.w3-bar, h1, button {
-  font-family: "Montserrat", sans-serif
-}
-
-.fa-anchor, .fa-coffee {
-  font-size: 200px
-}
-
 input {
-  margin-bottom: 20px;
   background: rgb(239, 238, 239);
-  position: relative;
-  top: -20px;
 }
 
 .error {
-  color: red;
-  position: relative;
-  top: -30px;
-}
-
-.w3-margin {
-  position: relative;
-  top: -55px;
+  color: purple;
 }
 
 p {
   font-size: 150%;
-  position: relative;
-  top: -55px
-}
-
-label {
-  position: relative;
-  top: -10px
-}
-
-div.form {
-    display: block;
-    text-align: center;
 }
 
 .loader {
@@ -63,14 +33,6 @@ div.form {
   animation: spin 2s linear infinite;
 }
 
-form {
-  position: relative;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
 /* Safari */
 
 @-webkit-keyframes spin {
@@ -89,4 +51,16 @@ form {
   100% {
     transform: rotate(360deg);
   }
+}
+
+body {
+  padding-top: 70px;
+}
+
+.spacer {
+  height: 10vh;
+}
+
+#submit_button {
+  margin-bottom: 100px;
 }
