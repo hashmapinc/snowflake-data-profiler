@@ -1,5 +1,5 @@
-def input_error(error):
-    error = str(error)
+def input_error(err):
+    error = str(err)
     print(error)
     if '002003' in error and 'Database' in error:
         return 'Snowflake database is not authorized or does not exist'
@@ -26,4 +26,4 @@ def input_error(error):
     elif '002043' in error:
         return 'Snowflake warehouse is not authorized or does not exist'
     else:
-        return 'Unknown Error'
+        return f"Lucky you, there's been an Unknown Error: {error}\n\nReach out to randy.pitcher@hashmapinc.com if you'd like to chat about this error or maybe you could try again (our profiling library is still maturing). Thanks!"
