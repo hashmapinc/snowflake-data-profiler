@@ -24,7 +24,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158371739-3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'UA-158371739-3');
@@ -41,97 +41,121 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles/main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
 </head>
 
-<body class="d-flex flex-column h-100">
-  <header class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="https://www.hashmapinc.com/" target="_blank">
-      <img src="/static/hashmap_banner_white.png" width="200px" />
-    </a>
+<header class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="https://www.hashmapinc.com/" target="_blank">
+    <img src="/static/hashmap_banner_white.png" width="200px" />
+  </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="mx-auto my-2 text-white">
-        <h3>Snowflake Data Profiler</h3>
-      </div>
-
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout" target="_blank">Contact Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback </a>
-        </li>
-      </ul>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="mx-auto my-2 text-white">
+      <h3>Snowflake Data Profiler</h3>
     </div>
-  </header>
-  <header class="w3-container w3-center" style="padding:150px 16px;">
-      <h1 class="w3-margin w3-xxlarge"><strong>Generate a data profile of the first 10K rows of one of your Snowflake tables</strong></h1>
-      <p class="note">Enter your Snowflake information below:</p>
-  <form class="pure-form pure-form-centered" action="" method="post" novalidate>
-        <fieldset>
-            <div class="pure-control-group">
-                <label for="aligned-name"></label>
-                <input size="40" name="username" type="text" id="aligned-name" placeholder="Snowflake username" />
-            </div>
-            <div class="pure-control-group">
-                <label for="aligned-password"></label>
-                <input size="40" name="password" type="password" id="aligned-password" placeholder="Snowflake password" />
-            </div>
-            <div class="pure-control-group">
-                <label for="aligned-url"></label>
-                <input size="40" name="url" type="text" id="aligned-url" placeholder="Snowflake URL" />
-            </div>
-            <div class="pure-control-group">
-                <label for="aligned-role"></label>
-                <input size="40" name="role" type="text" id="aligned-role" placeholder="Snowflake role (optional)" />
-            </div>
-            <div class="pure-control-group">
-                <label for="aligned-warehouse"></label>
-                <input size="40" name="warehouse" type="text" id="aligned-warehouse" placeholder="Snowflake warehouse (optional)" />
-            </div>
-            <div class="pure-control-group">
-                <label for="aligned-database"></label>
-                <input size="40" name="database" type="text" id="aligned-database" placeholder="Snowflake database" />
-            </div>
-            <div class="pure-control-group">
-                <label for="aligned-schema"></label>
-                <input size="40" name="schema" type="text" id="aligned-schema" placeholder="Snowflake schema" />
-            </div>
-            <div class="pure-control-group">
-                <label for="aligned-table"></label>
-                <input size="40" name="table" type="text" id="aligned-table" placeholder="Snowflake table" />
-            </div>
-            <div class="pure-controls">
-                <style scoped="">
-                  .button-large {
-                      font-size: 110%;
-                      background: rgb(70,172,236);
-                      color: rgb(255,255,255);
-                      border-radius: 30px;
-                      position: relative;
-                      top: -20px;
-                  }
-                </style>
-                <button id="submit_button" type="submit" class="button-large pure-button" onclick="loading()">Create data profile</button>
-            </div>
-        </fieldset>
-    </form>
-    {% if error %}
-        <p1 class="error">{{ error }}</p1>
-    {% endif %}
-  <div id="loading" class="loader"></div>
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout" target="_blank">Contact
+          Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback </a>
+      </li>
+    </ul>
+  </div>
 </header>
-  <script type="text/javascript">// <![CDATA[
-        function loading(){
-            $("#loading").show();
-        }
-// ]]></script>
+
+<body>
+  <div class="container">
+    <div class="py-5 text-center">
+      <h2>Generate a data profile of the first 10K rows of one of your Snowflake tables</h2>
+
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+
+      <div id='spinner' class="spinner-border text-primary" style="width: 5rem; height: 5rem; display:none;"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-8 col-xs-12 order-md-1 mx-auto">
+        <h4 class="mb-3">Snowflake details:</h4>
+
+        <form id='profiler-form' class="needs-validation" action="" method="post" novalidate>
+
+          <div class="mb-3">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="elon.musk@tesla.com" required="">
+            <div class="invalid-feedback">
+              Please enter a Snowflake username.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="password">Snowflake password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="cybertruck2021" required="">
+            <div class="invalid-feedback">
+              Please enter your Snowflake password.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="url">Snowflake URL <span class="text-muted">(or account name)</span></label>
+            <input type="text" class="form-control" id="url" name="url" placeholder="https://tesla.snowflakecomputing.com" required="">
+            <div class="invalid-feedback">
+              Please enter your Snowflake URL.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="role">Snowflake Role <span class="text-muted">(Optional)</span></label>
+            <input type="text" class="form-control" id="role" name="role" placeholder="CEO">
+          </div>
+
+          <div class="mb-3">
+            <label for="warehouse">Snowflake Virtual Warehouse <span class="text-muted">(Optional)</span></label>
+            <input type="text" class="form-control" id="warehouse" name="warehouse" placeholder="FLAMETHROWER_REPORTING_WH">
+          </div>
+
+          <div class="mb-3">
+            <label for="database">Database</label>
+            <input type="text" class="form-control" id="database" name="database" placeholder="PRODUCTION" required="">
+            <div class="invalid-feedback">
+              Please enter your Snowflake database name.
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="schema">Schema</label>
+            <input type="text" class="form-control" id="schema" name="schema" placeholder="INVENTORY" required="">
+            <div class="invalid-feedback">
+              Please enter your Snowflake schema name.
+            </div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="table">Table or View</label>
+            <input type="text" class="form-control" id="table" name="table" placeholder="MODEL_Y_INVENTORY" required="">
+            <div class="invalid-feedback">
+              Please enter your Snowflake table or view name.
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit" id="submit_button">
+            Create data profile
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class='spacer'/>
+  </div>
 
   <!-- Start of HubSpot Embed Code -->
   <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
@@ -145,6 +169,31 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
+
+    <script>
+      // Form validity check.
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              } else {
+                $("#spinner").show();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
 </body>
 
 </html>
