@@ -73,8 +73,14 @@
   <header class="w3-container w3-center" style="padding:150px 16px;">
       <h1 class="w3-margin w3-xxlarge"><strong>Generate a data profile of the first 10K rows of one of your Snowflake tables</strong></h1>
       <p class="note">Enter your Snowflake information below:</p>
-  <form class="pure-form pure-form-centered" action="" method="post" novalidate>
+  <div class="form">
+      <form class="pure-form pure-form-centered" action="" method="post" novalidate>
         <fieldset>
+            <div id="error-messager">
+              {% if error %}
+                    <p1 class="error">{{ error }}</p1>
+              {% endif %}
+            </div>
             <div class="pure-control-group">
                 <label for="aligned-name"></label>
                 <input size="40" name="username" type="text" id="aligned-name" placeholder="Snowflake username" />
@@ -120,12 +126,11 @@
                 </style>
                 <button id="submit_button" type="submit" class="button-large pure-button" onclick="loading()">Create data profile</button>
             </div>
+            <div id="loading" class="loader"></div>
         </fieldset>
     </form>
-    {% if error %}
-        <p1 class="error">{{ error }}</p1>
-    {% endif %}
-  <div id="loading" class="loader"></div>
+  </div>
+
 </header>
   <script type="text/javascript">// <![CDATA[
         function loading(){
