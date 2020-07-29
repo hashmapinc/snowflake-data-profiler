@@ -8,3 +8,4 @@ pyarrow==0.17.1
 requests==2.23.0
 snowflake-connector-python==2.2.9
 WTForms==2.3.1
+pytest==6.0.0
