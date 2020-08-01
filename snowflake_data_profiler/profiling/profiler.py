@@ -55,27 +55,25 @@ def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, s
     return df
 
 def get_profile_results(data):
-    if not data:
-        raise ValueError('A dataframe is needed.')
+    if isinstance(data, pd.DataFrame):
+        profile = ProfileReport(
+          data,
+          title='Snowflake Data Profiler from Hashmap',
+          progress_bar=False,
+          explorative=True,
+          correlations={
+             "pearson": {"calculate": True},
+             "spearman": {"calculate": False},
+             "kendall": {"calculate": False},
+             "phi_k": {"calculate": False},
+             "cramers": {"calculate": False},
+         },
+        )
+        p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
+        return p
+    else:
+        raise TypeError('This is not a pandas dataframe.')
 
-    if type(data) != 'pandas.core.frame.DataFrame':
-        raise TypeError('A Pandas dataframe is needed')
-
-    profile = ProfileReport(
-      data, 
-      title='Snowflake Data Profiler from Hashmap', 
-      progress_bar=False, 
-      explorative=True, 
-      correlations={
-         "pearson": {"calculate": True},
-         "spearman": {"calculate": False},
-         "kendall": {"calculate": False},
-         "phi_k": {"calculate": False},
-         "cramers": {"calculate": False},
-     },
-    )
-    p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
-    return p
 
 def do_profile():
     pd_df = connect_to_snowflake()
