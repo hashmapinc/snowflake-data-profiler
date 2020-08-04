@@ -1,5 +1,5 @@
 from flask import render_template, request, Response, Blueprint
-from snowflake_data_profiler.profiling.profiler import connect_to_snowflake, get_profile_results
+from snowflake_data_profiler.profiling.profiler import establish_connection, create_cursor, get_profile_results
 from snowflake_data_profiler.error_handling.error_handler import input_error
 
 #==============================================================================
@@ -26,7 +26,8 @@ def post_profile():
         database  = req.get('database')
         schema    = req.get('schema')
         table     = req.get('table')
-        pd_df = connect_to_snowflake(username, password, url, database, schema, table, warehouse, role)
+        connector = establish_connection(username, password, url, database, schema, table, role)
+        pd_df = create_cursor(connector, database, schema, table, warehouse)
         profile_page = get_profile_results(pd_df)
 
     except Exception as e:

@@ -1,20 +1,20 @@
 import pytest
 import pandas as pd
-from snowflake_data_profiler.profiling.profiler import get_snowflake_account_name, connect_to_snowflake, get_profile_results
+from snowflake_data_profiler.profiling.profiler import get_snowflake_account_name, establish_connection, create_cursor, get_profile_results
 
 #==============================================================================
 # python testing for profiler.py
 #==============================================================================
 
 
-# python testing error handling for connect_to_snowflake
-def test_connect_to_snowflake():
+# python testing for establish connection
+def test_establish_connection():
 
     with pytest.raises(ValueError):
-        connect_to_snowflake('','','','','','')
+        establish_connection('','','','','','')
 
     with pytest.raises(ValueError):
-        connect_to_snowflake(sfUser='user',
+        establish_connection(sfUser='user',
                              sfPswd='password',
                              sfURL='',
                              sfDatabase='database',
@@ -22,7 +22,7 @@ def test_connect_to_snowflake():
                              sfTable='table')
 
     with pytest.raises(ValueError):
-        connect_to_snowflake(sfUser=None,
+        establish_connection(sfUser=None,
                              sfPswd='password',
                              sfURL='url',
                              sfDatabase='database',
@@ -30,23 +30,21 @@ def test_connect_to_snowflake():
                              sfTable='table')
 
     with pytest.raises(ValueError):
-        connect_to_snowflake(sfUser='user',
+        establish_connection(sfUser='user',
                              sfPswd='password',
                              sfURL=None,
                              sfDatabase='database',
                              sfSchema='schema',
                              sfTable='table',
-                             sfWarehouse=None,
                              sfRole='role')
 
     with pytest.raises(ValueError):
-        connect_to_snowflake(sfUser='user',
+        establish_connection(sfUser='user',
                              sfPswd='password',
                              sfURL='url',
                              sfDatabase='database',
                              sfSchema='schema',
                              sfTable='',
-                             sfWarehouse='warehouse',
                              sfRole='role')
 
 
@@ -69,7 +67,7 @@ def test_get_snowflake_account_name():
     assert result == 'hashmap.fake'
 
 
-# python testing error handling for get_profile_results
+# python testing for get_profile_results
 def test_get_profile_results():
 
     with pytest.raises(TypeError):

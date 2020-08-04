@@ -32,7 +32,9 @@ def file_to_df(file_name):
         df = pd.read_sql(file_name)
     return df
 
-def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
+
+# establishes snowflake connection
+def establish_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole=None):
     if not sfUser or not sfPswd or not sfURL or not sfDatabase or not sfSchema or not sfTable:
         raise ValueError('A required variable has not been added.')
 
@@ -46,14 +48,22 @@ def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, s
         schema=sfSchema,
         role=sfRole,
     )
+    return con
+
+
+# creates cursor object and returns a pandas dataframe
+def create_cursor(con, sfDatabase, sfSchema, sfTable, sfWarehouse=None):
     cur = con.cursor()
     if sfWarehouse:
         cur.execute(f'use warehouse {sfWarehouse};')
 
     cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable} limit 10000;')
     df = cur.fetch_pandas_all()
+
     return df
 
+
+# profiles pandas dataframe
 def get_profile_results(data):
     if isinstance(data, pd.DataFrame):
         profile = ProfileReport(
@@ -76,7 +86,8 @@ def get_profile_results(data):
 
 
 def do_profile():
-    pd_df = connect_to_snowflake()
+    conn = establish_connection()
+    pd_df = create_cursor(conn)
     return get_profile_results(pd_df)
 
 if __name__ == "__main__":
