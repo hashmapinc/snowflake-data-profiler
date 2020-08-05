@@ -100,5 +100,3 @@ def get_profile(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole=Non
     return get_profile_results(pd_df)
 
 
-if __name__ == "__main__":
-    get_profile()
