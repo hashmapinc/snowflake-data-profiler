@@ -51,7 +51,6 @@ def get_snowflake_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTabl
         schema=sfSchema,
         role=sfRole,
     )
-    print('type:', type(con))
 
     return con
 
