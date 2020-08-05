@@ -1,5 +1,7 @@
 import pytest
 import pandas as pd
+import mock
+from mock import patch, MagicMock, create_autospec
 from snowflake_data_profiler.profiling.profiler import get_snowflake_account_name, establish_connection, create_cursor, get_profile_results
 
 #==============================================================================
@@ -7,7 +9,7 @@ from snowflake_data_profiler.profiling.profiler import get_snowflake_account_nam
 #==============================================================================
 
 
-# python testing for establish connection
+# python testing for establish_connection
 def test_establish_connection():
 
     with pytest.raises(ValueError):
@@ -46,6 +48,28 @@ def test_establish_connection():
                              sfSchema='schema',
                              sfTable='',
                              sfRole='role')
+
+    with mock.patch('snowflake_data_profiler.profiling.profiler.connector.connect', return_value='some connection value') as mock_connect:
+        assert establish_connection(sfUser='user', sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole=None) == 'some connection value'
+
+        mock_connect.assert_called_with(user='user', password='password', account='url', database='database', schema='schema', role=None)
+
+    with mock.patch('snowflake_data_profiler.profiling.profiler.connector.connect', return_value=['a', 'nice', 'fancy', 'list']) as mock_connect:
+        assert establish_connection(sfUser='user', sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole='role') == ['a', 'nice', 'fancy', 'list']
+
+        mock_connect.assert_called_with(user='user', password='password', account='url', database='database', schema='schema', role='role')
+
+
+def test_create_cursor():
+    mock_create_cursor = create_autospec(create_cursor, return_value='some pd_df')
+    assert mock_create_cursor(con='connector', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse='warehouse') == 'some pd_df'
+
+    with pytest.raises(ValueError):
+        create_cursor(con='connector', sfDatabase='database', sfSchema='schema', sfTable=None, sfWarehouse='warehouse')
+
+    with pytest.raises(ValueError):
+        create_cursor(con='', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse='warehouse')
+
 
 
 # python testing for get_snowflake_account_name

@@ -48,11 +48,14 @@ def establish_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, s
         schema=sfSchema,
         role=sfRole,
     )
+    print('type:', type(con))
     return con
 
 
 # creates cursor object and returns a pandas dataframe
 def create_cursor(con, sfDatabase, sfSchema, sfTable, sfWarehouse=None):
+    if not con or not sfDatabase or not sfSchema or not sfTable:
+        raise ValueError('A required variable has not been added.')
     cur = con.cursor()
     if sfWarehouse:
         cur.execute(f'use warehouse {sfWarehouse};')
