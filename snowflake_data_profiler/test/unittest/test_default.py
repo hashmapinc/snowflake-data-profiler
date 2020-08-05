@@ -15,7 +15,8 @@ def tester():
     ctx.pop()
 
 
-def test_get_profile(tester):
+def test_get_data(tester):
+    """python testing for default get handler"""
 
     # ensure flask set up correctly
     response = tester.get('/', content_type='html/text')

@@ -1,7 +1,7 @@
 from snowflake_data_profiler.error_handling.error_handler import input_error
 
-# python testing for error_handler.py
 def test_input_error():
+    """python testing for error_handler.py"""
 
     result = input_error("002003 (02000): SQL compilation error: Database 'RQOJOQ' does not exist or not authorized.")
     assert result == 'Snowflake database is not authorized or does not exist'

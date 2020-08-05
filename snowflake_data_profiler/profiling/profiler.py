@@ -4,6 +4,8 @@ from snowflake import connector
 
 
 def get_snowflake_account_name(sfURL):
+    """parses snowflake url if given a url"""
+
     # check if this is a url or already is an account name
     if '.snowflakecomputing.com' not in sfURL:
         return sfURL # assume that without the domain, this is already an account name
@@ -32,7 +34,10 @@ def file_to_df(file_name):
         df = pd.read_sql(file_name)
     return df
 
-def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
+
+def get_snowflake_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole=None):
+    """establishes snowflake connection and returns connector object"""
+
     if not sfUser or not sfPswd or not sfURL or not sfDatabase or not sfSchema or not sfTable:
         raise ValueError('A required variable has not been added.')
 
@@ -46,15 +51,25 @@ def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, s
         schema=sfSchema,
         role=sfRole,
     )
+    return con
+
+
+def get_pandas_dataframe(con, sfDatabase, sfSchema, sfTable, sfWarehouse=None):
+    """creates cursor object and returns a pandas dataframe from the Snowflake table"""
+
     cur = con.cursor()
     if sfWarehouse:
         cur.execute(f'use warehouse {sfWarehouse};')
 
     cur.execute(f'select * from {sfDatabase}.{sfSchema}.{sfTable} limit 10000;')
     df = cur.fetch_pandas_all()
+
     return df
 
+
 def get_profile_results(data):
+    """profiles pandas dataframe"""
+
     if isinstance(data, pd.DataFrame):
         profile = ProfileReport(
           data,
@@ -69,15 +84,19 @@ def get_profile_results(data):
              "cramers": {"calculate": False},
          },
         )
+
         p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
         return p
+
     else:
         raise TypeError('This is not a pandas dataframe.')
 
 
-def do_profile():
-    pd_df = connect_to_snowflake()
+def get_profile(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole=None, sfWarehouse=None):
+    """main function"""
+
+    conn = get_snowflake_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole)
+    pd_df = get_pandas_dataframe(conn, sfDatabase, sfSchema, sfTable, sfWarehouse)
     return get_profile_results(pd_df)
 
-if __name__ == "__main__":
-    do_profile()
+

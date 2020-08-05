@@ -1,6 +1,5 @@
 def input_error(err):
     error = str(err)
-    print(error)
     if '002003' in error and 'Database' in error:
         return 'Snowflake database is not authorized or does not exist'
     elif '002003' in error and 'Schema' in error:
