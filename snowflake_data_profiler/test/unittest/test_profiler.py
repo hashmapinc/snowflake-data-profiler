@@ -11,6 +11,7 @@ from snowflake_data_profiler.profiling.profiler import get_snowflake_account_nam
 
 # python testing for establish_connection
 def test_establish_connection():
+    """unit testing for establish_connection"""
 
     with pytest.raises(ValueError):
         establish_connection('','','','','','')
@@ -61,8 +62,14 @@ def test_establish_connection():
 
 
 def test_create_cursor():
+    """Unit testing for create_cursor"""
+
     mock_create_cursor = create_autospec(create_cursor, return_value='some pd_df')
     assert mock_create_cursor(con='connector', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse='warehouse') == 'some pd_df'
+
+    mock_create_cursor = create_autospec(create_cursor, return_value=['a', 'list'])
+    assert mock_create_cursor(con='connector', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse=None) == ['a', 'list']
+    mock_create_cursor.assert_called_with(con='connector', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse=None)
 
     with pytest.raises(ValueError):
         create_cursor(con='connector', sfDatabase='database', sfSchema='schema', sfTable=None, sfWarehouse='warehouse')
