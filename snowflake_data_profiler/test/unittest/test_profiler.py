@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from snowflake_data_profiler.profiling.profiler import get_snowflake_account_name, establish_connection, create_cursor, get_profile_results
+from snowflake_data_profiler.profiling.profiler import get_snowflake_account_name, get_snowflake_connection, get_pandas_dataframe, get_profile_results
 
 #==============================================================================
 # python testing for profiler.py
@@ -8,48 +8,49 @@ from snowflake_data_profiler.profiling.profiler import get_snowflake_account_nam
 
 
 # python testing for establish connection
-def test_establish_connection():
+def test_get_snowflake_connection():
+    """python testing for get_snowflake_connection"""
 
     with pytest.raises(ValueError):
-        establish_connection('','','','','','')
+        get_snowflake_connection('','','','','','')
 
     with pytest.raises(ValueError):
-        establish_connection(sfUser='user',
-                             sfPswd='password',
-                             sfURL='',
-                             sfDatabase='database',
-                             sfSchema='schema',
-                             sfTable='table')
+        get_snowflake_connection(sfUser='user',
+                                 sfPswd='password',
+                                 sfURL='',
+                                 sfDatabase='database',
+                                 sfSchema='schema',
+                                 sfTable='table')
 
     with pytest.raises(ValueError):
-        establish_connection(sfUser=None,
-                             sfPswd='password',
-                             sfURL='url',
-                             sfDatabase='database',
-                             sfSchema='schema',
-                             sfTable='table')
+        get_snowflake_connection(sfUser=None,
+                                 sfPswd='password',
+                                 sfURL='url',
+                                 sfDatabase='database',
+                                 sfSchema='schema',
+                                 sfTable='table')
 
     with pytest.raises(ValueError):
-        establish_connection(sfUser='user',
-                             sfPswd='password',
-                             sfURL=None,
-                             sfDatabase='database',
-                             sfSchema='schema',
-                             sfTable='table',
-                             sfRole='role')
+        get_snowflake_connection(sfUser='user',
+                                 sfPswd='password',
+                                 sfURL=None,
+                                 sfDatabase='database',
+                                 sfSchema='schema',
+                                 sfTable='table',
+                                 sfRole='role')
 
     with pytest.raises(ValueError):
-        establish_connection(sfUser='user',
-                             sfPswd='password',
-                             sfURL='url',
-                             sfDatabase='database',
-                             sfSchema='schema',
-                             sfTable='',
-                             sfRole='role')
+        get_snowflake_connection(sfUser='user',
+                                 sfPswd='password',
+                                 sfURL='url',
+                                 sfDatabase='database',
+                                 sfSchema='schema',
+                                 sfTable='',
+                                 sfRole='role')
 
 
-# python testing for get_snowflake_account_name
 def test_get_snowflake_account_name():
+    """python testing for get_snowflake_account_name"""
 
     result = get_snowflake_account_name('hashmap')
     assert result == 'hashmap'
@@ -67,8 +68,8 @@ def test_get_snowflake_account_name():
     assert result == 'hashmap.fake'
 
 
-# python testing for get_profile_results
 def test_get_profile_results():
+    """python testing for get_profile_results"""
 
     with pytest.raises(TypeError):
         get_profile_results({'a': 10, 'b':9})
