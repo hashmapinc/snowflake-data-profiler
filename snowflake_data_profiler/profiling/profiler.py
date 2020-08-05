@@ -2,17 +2,19 @@ import pandas as pd
 from pandas_profiling import ProfileReport
 from snowflake import connector
 
-def get_snowflake_account_name(sfURL):
-  # check if this is a url or already is an account name
-  if '.snowflakecomputing.com' not in sfURL:
-    return sfURL # assume that without the domain, this is already an account name
-  
-  # extract the http(s):// if it exists
-  stripped_url = sfURL.split('://')[1] if '://' in sfURL else sfURL
 
-  # pull out the account name now that we have the stripped url
-  account_name = stripped_url.split('.snowflakecomputing.com')[0]
-  return account_name
+def get_snowflake_account_name(sfURL):
+    # check if this is a url or already is an account name
+    if '.snowflakecomputing.com' not in sfURL:
+        return sfURL # assume that without the domain, this is already an account name
+
+    # extract the http(s):// if it exists
+    stripped_url = sfURL.split('://')[1] if '://' in sfURL else sfURL
+
+    # pull out the account name now that we have the stripped url
+    account_name = stripped_url.split('.snowflakecomputing.com')[0]
+
+    return account_name
 
 
 def file_to_df(file_name):
@@ -31,6 +33,9 @@ def file_to_df(file_name):
     return df
 
 def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfWarehouse=None, sfRole=None):
+    if not sfUser or not sfPswd or not sfURL or not sfDatabase or not sfSchema or not sfTable:
+        raise ValueError('A required variable has not been added.')
+
     sfAccount = get_snowflake_account_name(sfURL)
     
     con = connector.connect(
@@ -50,21 +55,25 @@ def connect_to_snowflake(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, s
     return df
 
 def get_profile_results(data):
-    profile = ProfileReport(
-      data, 
-      title='Snowflake Data Profiler from Hashmap', 
-      progress_bar=False, 
-      explorative=True, 
-      correlations={
-         "pearson": {"calculate": True},
-         "spearman": {"calculate": False},
-         "kendall": {"calculate": False},
-         "phi_k": {"calculate": False},
-         "cramers": {"calculate": False},
-     },
-    )
-    p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
-    return p
+    if isinstance(data, pd.DataFrame):
+        profile = ProfileReport(
+          data,
+          title='Snowflake Data Profiler from Hashmap',
+          progress_bar=False,
+          explorative=True,
+          correlations={
+             "pearson": {"calculate": True},
+             "spearman": {"calculate": False},
+             "kendall": {"calculate": False},
+             "phi_k": {"calculate": False},
+             "cramers": {"calculate": False},
+         },
+        )
+        p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
+        return p
+    else:
+        raise TypeError('This is not a pandas dataframe.')
+
 
 def do_profile():
     pd_df = connect_to_snowflake()

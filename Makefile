@@ -11,3 +11,6 @@ image:
 
 container:
 	docker run -it -p 5000:5000 snowflake_data_profiler
+
+test: venv
+	source ./venv/bin/activate && pytest
