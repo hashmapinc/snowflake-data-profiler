@@ -101,6 +101,9 @@ def get_profile_results(data):
 def get_profile(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole=None, sfWarehouse=None):
     """main function"""
 
+    if not sfUser or not sfPswd or not sfURL or not sfDatabase or not sfSchema or not sfTable:
+        raise ValueError('A required variable has not been added.')
+
     conn = get_snowflake_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole)
     pd_df = get_pandas_dataframe(conn, sfDatabase, sfSchema, sfTable, sfWarehouse)
 

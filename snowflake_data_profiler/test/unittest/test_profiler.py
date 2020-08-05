@@ -2,7 +2,7 @@ import pytest
 import pandas as pd
 import mock
 from mock import create_autospec
-from snowflake_data_profiler.profiling.profiler import get_snowflake_account_name, get_snowflake_connection, get_pandas_dataframe, get_profile_results
+from snowflake_data_profiler.profiling.profiler import get_snowflake_account_name, get_snowflake_connection, get_pandas_dataframe, get_profile_results, get_profile
 
 
 #==============================================================================
@@ -10,8 +10,29 @@ from snowflake_data_profiler.profiling.profiler import get_snowflake_account_nam
 #==============================================================================
 
 
+def test_get_profile():
+    """Unit testing for get_profile"""
+
+    mock_get_profile = create_autospec(get_profile, return_value='some profile report')
+    assert mock_get_profile(sfUser='username', sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole='role', sfWarehouse='warehouse') == 'some profile report'
+    mock_get_profile.assert_called_with(sfUser='username', sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole='role', sfWarehouse='warehouse')
+
+    mock_get_profile = create_autospec(get_profile, return_value='some profile report')
+    assert mock_get_profile(sfUser='username', sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole=None, sfWarehouse=None) == 'some profile report'
+    mock_get_profile.assert_called_with(sfUser='username', sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole=None, sfWarehouse=None)
+
+    with pytest.raises(ValueError):
+        get_profile(sfUser='username', sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable=None, sfRole=None, sfWarehouse=None)
+
+    with pytest.raises(ValueError):
+        get_profile(sfUser=None, sfPswd='password', sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole=None, sfWarehouse=None)
+
+    with pytest.raises(ValueError):
+        get_profile(sfUser='username', sfPswd=None, sfURL='url', sfDatabase='database', sfSchema='schema', sfTable='table', sfRole=None, sfWarehouse=None)
+
+
 def test_get_snowflake_connection():
-    """python testing for get_snowflake_connection"""
+    """Unit testing for get_snowflake_connection"""
 
     with pytest.raises(ValueError):
         get_snowflake_connection('','','','','','')
@@ -61,7 +82,7 @@ def test_get_snowflake_connection():
         mock_connect.assert_called_with(user='user', password='password', account='url', database='database', schema='schema', role='role')
 
 
-def test_create_cursor():
+def test_get_pandas_dataframe():
     """Unit testing for get_pandas_dataframe"""
 
     mock_get_pandas_dataframe = create_autospec(get_pandas_dataframe, return_value='some pd_df')
@@ -79,7 +100,7 @@ def test_create_cursor():
 
 
 def test_get_snowflake_account_name():
-    """python testing for get_snowflake_account_name"""
+    """Unit testing for get_snowflake_account_name"""
 
     result = get_snowflake_account_name('hashmap')
     assert result == 'hashmap'
@@ -98,7 +119,7 @@ def test_get_snowflake_account_name():
 
 
 def test_get_profile_results():
-    """python testing for get_profile_results"""
+    """Unit testing for get_profile_results"""
 
     with pytest.raises(TypeError):
         get_profile_results({'a': 10, 'b':9})
