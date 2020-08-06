@@ -51,11 +51,15 @@ def get_snowflake_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTabl
         schema=sfSchema,
         role=sfRole,
     )
+
     return con
 
 
 def get_pandas_dataframe(con, sfDatabase, sfSchema, sfTable, sfWarehouse=None):
     """creates cursor object and returns a pandas dataframe from the Snowflake table"""
+
+    if not con or not sfDatabase or not sfSchema or not sfTable:
+        raise ValueError('A required variable has not been added.')
 
     cur = con.cursor()
     if sfWarehouse:
@@ -86,6 +90,7 @@ def get_profile_results(data):
         )
 
         p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
+
         return p
 
     else:
@@ -95,8 +100,12 @@ def get_profile_results(data):
 def get_profile(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole=None, sfWarehouse=None):
     """main function"""
 
+    if not sfUser or not sfPswd or not sfURL or not sfDatabase or not sfSchema or not sfTable:
+        raise ValueError('A required variable has not been added.')
+
     conn = get_snowflake_connection(sfUser, sfPswd, sfURL, sfDatabase, sfSchema, sfTable, sfRole)
     pd_df = get_pandas_dataframe(conn, sfDatabase, sfSchema, sfTable, sfWarehouse)
+
     return get_profile_results(pd_df)
 
 
