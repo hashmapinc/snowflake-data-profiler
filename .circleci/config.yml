@@ -38,6 +38,7 @@ jobs:
       - run:
           name: Test code
           command: |
+            cd snowflake_data_profiler
             pytest
 
 
