@@ -29,6 +29,18 @@ jobs:
             ssh -o StrictHostKeyChecking=no $EC2_TARGET "docker image prune -a -f && docker container prune -f"
             ssh -o StrictHostKeyChecking=no $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose down && docker-compose up -d"
 
+  test_profiler:
+      docker:
+        - image: randypitcherii/snowflake_data_profiler:$CIRCLE_SHA1
+
+      steps:
+        - run:
+            name: Test code
+            command: |
+              cd snowflake-data-profiler
+              pytest
+
+
 workflows:
   build_and_deploy:
     jobs:
