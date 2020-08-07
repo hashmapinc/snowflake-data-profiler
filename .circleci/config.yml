@@ -30,7 +30,7 @@ jobs:
             ssh -o StrictHostKeyChecking=no $EC2_TARGET "cd $EC2_DEPLOY_PATH && docker-compose pull && docker-compose down && docker-compose up -d"
 
   test_profiler:
-    working_directory: ~/snowflake-data-profiler
+    working_directory: ~/profiler.snowflakeinspector.com
     docker:
       - image: randypitcherii/snowflake_data_profiler:$CIRCLE_SHA1
 
