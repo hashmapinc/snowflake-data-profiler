@@ -87,6 +87,7 @@ def test_get_pandas_dataframe():
 
     mock_get_pandas_dataframe = create_autospec(get_pandas_dataframe, return_value='some pd_df')
     assert mock_get_pandas_dataframe(con='connector', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse='warehouse') == 'some pd_df'
+    mock_get_pandas_dataframe.assert_called_with(con='connector', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse='warehouse')
 
     mock_get_pandas_dataframe = create_autospec(get_pandas_dataframe, return_value=['a', 'list'])
     assert mock_get_pandas_dataframe(con='connector', sfDatabase='database', sfSchema='schema', sfTable='table', sfWarehouse=None) == ['a', 'list']
@@ -120,6 +121,10 @@ def test_get_snowflake_account_name():
 
 def test_get_profile_results():
     """Unit testing for get_profile_results"""
+
+    mock_get_profile_results = create_autospec(get_profile_results, return_value='some profile')
+    assert mock_get_profile_results('some pd_df') == 'some profile'
+    mock_get_profile_results.assert_called_with('some pd_df')
 
     with pytest.raises(TypeError):
         get_profile_results({'a': 10, 'b':9})
