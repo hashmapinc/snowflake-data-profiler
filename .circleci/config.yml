@@ -33,10 +33,11 @@ jobs:
     docker:
       - image: randypitcherii/snowflake_data_profiler:$CIRCLE_SHA1
     steps:
-      - checkout
       - run:
           name: Test code
           command: |
+            ls
+            cd && ls
             cd snowflake_data_profiler
             mkdir test-results
             pytest --junitxml=test-results/junit.xml
