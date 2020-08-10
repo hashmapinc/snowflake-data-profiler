@@ -38,8 +38,11 @@ jobs:
           name: Test code
           command: |
             cd snowflake_data_profiler
-            pytest
+            mkdir test-results
+            pytest --junitxml=test-results/junit.xml
       - store_test_results:
+          path: test-results
+      - store_artifacts:
           path: test-results
 
 
