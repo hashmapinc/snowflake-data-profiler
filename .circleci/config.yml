@@ -31,19 +31,13 @@ jobs:
 
   test_profiler:
     docker:
-      - image: randypitcherii/snowflake_data_profiler:714ccd59ae4ad30decdeb2dd62014cbe312767a1
+      - image: randypitcherii/snowflake_data_profiler:$CIRCLE_SHA1
     steps:
       - run:
           name: Test code
           command: |
             cd /snowflake_data_profiler
-            mkdir test-results
-            pytest --junitxml=test-results/junit.xml
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
-
+            pytest
 
 workflows:
   build_and_deploy:
@@ -52,10 +46,9 @@ workflows:
           image: randypitcherii/snowflake_data_profiler
           docker-password: DOCKERHUB_KEY
           tag: latest,$CIRCLE_SHA1
-          filters:
-            branches:
-              only: master
-      - test_profiler
+      - test_profiler:
+          requires:
+            - docker/publish
       - deploy_profiler:
           filters:
             branches:
