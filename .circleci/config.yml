@@ -31,7 +31,7 @@ jobs:
 
   test_profiler:
     docker:
-      - image: randypitcherii/snowflake_data_profiler:$CIRCLE_SHA1
+      - image: randypitcherii/snowflake_data_profiler:714ccd59ae4ad30decdeb2dd62014cbe312767a1
     steps:
       - run:
           name: Test code
@@ -54,9 +54,10 @@ workflows:
           image: randypitcherii/snowflake_data_profiler
           docker-password: DOCKERHUB_KEY
           tag: latest,$CIRCLE_SHA1
-      - test_profiler:
-          requires:
-            - docker/publish
+          filters:
+            branches:
+              only: master
+      - test_profiler
       - deploy_profiler:
           filters:
             branches:
