@@ -39,6 +39,8 @@ jobs:
           command: |
             cd snowflake_data_profiler
             pytest
+      - store_test_results:
+          path: test-results
 
 
 workflows:
