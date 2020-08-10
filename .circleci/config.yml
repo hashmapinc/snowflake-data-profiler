@@ -36,8 +36,7 @@ jobs:
       - run:
           name: Test code
           command: |
-            ls /
-            cd snowflake_data_profiler
+            cd /snowflake_data_profiler
             mkdir test-results
             pytest --junitxml=test-results/junit.xml
       - store_test_results:
