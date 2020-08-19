@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sdp-deployment
+  labels:
+    customer: sdp
+spec:
+  selector:
+    matchLabels:
+      app: snowflake-data-profiler
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: snowflake-data-profiler
+    spec:
+      containers:
+      - image: nginx
+        name: nginx-container
+        ports:
+          - containerPort: 80
+          - containerPort: 443
+      - image: randypitcherii/snowflake_data_profiler:latest
+        name: sdp-container
+        resources:
+          limits:
+            cpu: 1
+          requests:
+            cpu: 0.5
+        ports:
+          - containerPort: 5000
+
+
+
+
+
