@@ -33,32 +33,26 @@ jobs:
     docker:
       - image: randypitcherii/snowflake_data_profiler:$CIRCLE_SHA1
     steps:
-      - checkout
       - run:
           name: Test code
           command: |
-            cd snowflake_data_profiler
-            mkdir test-results
-            pytest --junitxml=test-results/junit.xml
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
+            cd /snowflake_data_profiler
+            pytest
 
 
-workflows:
-  build_and_deploy:
-    jobs:
-      - docker/publish:
-          image: randypitcherii/snowflake_data_profiler
-          docker-password: DOCKERHUB_KEY
-          tag: latest,$CIRCLE_SHA1
-      - test_profiler:
-          requires:
-            - docker/publish
-      - deploy_profiler:
-          filters:
-            branches:
-              only: master
-          requires:
-            - test_profiler
+  workflows:
+    build_and_deploy:
+      jobs:
+        - docker/publish:
+            image: randypitcherii/snowflake_data_profiler
+            docker-password: DOCKERHUB_KEY
+            tag: latest,$CIRCLE_SHA1
+        - test_profiler:
+            requires:
+              - docker/publish
+        - deploy_profiler:
+            filters:
+              branches:
+                only: master
+            requires:
+              - test_profiler
