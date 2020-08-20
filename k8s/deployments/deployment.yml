@@ -19,6 +19,11 @@ spec:
       containers:
       - image: nginx
         name: nginx-container
+        resources:
+          limits:
+            cpu: 0.5
+          requests:
+            cpu: 0.25
         ports:
           - containerPort: 80
           - containerPort: 443
@@ -26,9 +31,9 @@ spec:
         name: sdp-container
         resources:
           limits:
-            cpu: 1
-          requests:
             cpu: 0.5
+          requests:
+            cpu: 0.25
         ports:
           - containerPort: 5000
 
