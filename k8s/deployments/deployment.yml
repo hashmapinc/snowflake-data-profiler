@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sdp-deployment
+  name: snowflake-data-profiler
   labels:
-    customer: sdp
+    app: snowflake_data_profiler
 spec:
   selector:
     matchLabels:
@@ -17,23 +17,13 @@ spec:
         app: snowflake-data-profiler
     spec:
       containers:
-      - image: nginx
-        name: nginx-container
-        resources:
-          limits:
-            cpu: 0.5
-          requests:
-            cpu: 0.25
-        ports:
-          - containerPort: 80
-          - containerPort: 443
       - image: randypitcherii/snowflake_data_profiler:latest
         name: sdp-container
         resources:
           limits:
-            cpu: 0.5
+            cpu: 0.9
           requests:
-            cpu: 0.25
+            cpu: 0.45
         ports:
           - containerPort: 5000
 
