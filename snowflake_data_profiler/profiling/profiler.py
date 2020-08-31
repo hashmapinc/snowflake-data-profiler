@@ -90,7 +90,6 @@ def get_profile_results(data):
         )
 
         p = profile.to_html() # this step sometimes fails with matplotlib errors about threads. I've only fixed it by adjusting requirements.txt in the past. I've just specified the specific versions of libraries. Pyarrow seems to have an impact on this.
-
         return p
 
     else:

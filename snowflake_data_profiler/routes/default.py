@@ -1,6 +1,7 @@
-from flask import render_template, request, Response, Blueprint
+from flask import render_template, request, Response, Blueprint, url_for, jsonify
 from snowflake_data_profiler.profiling.profiler import get_profile
 from snowflake_data_profiler.error_handling.error_handler import input_error
+
 
 #==============================================================================
 # default API 
@@ -9,17 +10,10 @@ from snowflake_data_profiler.error_handling.error_handler import input_error
 bp = Blueprint('default', __name__)
 
 
-@bp.route('/', methods=['GET'])
-def get_data():
-    """default get handler"""
-
-    return render_template('profile.html', title='Profiler')
-
-
 @bp.route('/', methods=['POST'])
 def post_data():
     """default post handler"""
-
+    resp = {}
     try:
         req       = request.form
         username  = req.get('username')
@@ -34,10 +28,13 @@ def post_data():
 
     except Exception as e:
         print(e)
-        error = input_error(e)
-        return render_template('profile.html', title='Error Occurred', error=error)
+        resp['status'] = 'error'
+        resp['error'] = input_error(e)
+        return jsonify(resp)
 
-    return Response(profile_page, mimetype='text/html')
+    resp['status'] = 'ok'
+    resp['profile_report'] = profile_page
+    return jsonify(resp)
 #==============================================================================
 
 
