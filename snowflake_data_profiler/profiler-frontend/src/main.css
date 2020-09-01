@@ -14,7 +14,7 @@ p {
   font-size: 150%;
 }
 
-.loader {
+.spinner {
   display: none;
   position: relative;
   top: 90%;

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import { Button, Form, Spinner} from "react-bootstrap";
-import $, { uniqueSort } from 'jquery';
+
 
 class ProfilerForm extends Component {
+  
+
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,8 +23,9 @@ class ProfilerForm extends Component {
     }
 
     event.preventDefault();
+    this.setState({isLoading:true});
     const data = new FormData(event.target);
-    this.setState({validated:true, isLoading:true});
+    this.setState({validated:true, error: null});
     fetch('/report', {
       method:"POST",
       body: data,
@@ -36,29 +39,30 @@ class ProfilerForm extends Component {
       if (r.status === 'ok') {
         var wnd = window.open("", "_blank");
         wnd.document.write(r.profile_report);
-        return r.json();
-      } else {
         this.setState({isLoading:false});
-        this.setState({error: r.error});
+        return r;
+      } else {
+        this.setState({error: r.error, isLoading: false});
+        return r;
       }
     })
-    .then(this.setState({isLoading:false}))
+    .then(r => {console.log(r)})
   }
 
   render() {
-    let {isLoading, error} = this.state;
-
-    const renderSpinner =()=>{
-      if(isLoading) {
-        return <p>loading...</p>
-      } else{
-        return
-      }
-    }
+    let {error, isLoading} = this.state;
 
     const renderError = ()=>{
       if(error) {
         return <p className="error">{error}</p>
+      } else {
+        return
+      }
+    }
+
+    const renderSpinning = ()=>{
+      if(isLoading) {
+        return <Spinner className='spinner' animation="border" variant="primary" size={150}><span className="sr-only">Loading...</span></Spinner>
       } else {
         return
       }
@@ -69,7 +73,7 @@ class ProfilerForm extends Component {
       <div className="py-5 text-center">
           <h2>Generate a data profile of the first 10K rows of one of your Snowflake tables</h2>
           {renderError()}
-          {renderSpinner()}
+          {renderSpinning()}
       </div>
       <div class="row">
       <div class="col-8 col-xs-12 order-md-1 mx-auto">

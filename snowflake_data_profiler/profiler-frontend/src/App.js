@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import Navbar from './Components/Navbar'
 import ProfilerForm from './Components/Table'
-import Header from './Components/Header'
+
 import './main.css'
 import './App.css';
 
 class App extends Component {
+
   
+
   render() {
     return (
       <div className="container">
