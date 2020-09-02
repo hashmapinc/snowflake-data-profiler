@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Form, Spinner} from "react-bootstrap";
+import '../main.css'
+import ViewProfileButton from './ViewProfileButton'
 
 
 class ProfilerForm extends Component {
@@ -8,20 +10,29 @@ class ProfilerForm extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    /** Intializing props for form component */
     this.state = {
       validated: false,
       isLoading: false,
       error: null,
+      report_html: null,
     };
   }
 
+  /** Handles form submission */
   handleSubmit = (event) => {
+    this.setState({report_html: null})
+    
+    /** Checks validity of form 
+     */
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
 
+    /** sends a fetch request to the flask api */
     event.preventDefault();
     this.setState({isLoading:true});
     const data = new FormData(event.target);
@@ -32,26 +43,30 @@ class ProfilerForm extends Component {
       headers:{
         "content_type":"multpart/form-data",
       },
-  
     })
+
+    /** returns response as json object */
     .then(r => {return r.json()})
+
+    /** if status is 'ok' loading spinners are set to false
+     */
     .then(r => {
       if (r.status === 'ok') {
-        var wnd = window.open("", "_blank");
-        wnd.document.write(r.profile_report);
-        this.setState({isLoading:false});
+        this.setState({isLoading:false, report_html: r.profile_report});
+
         return r;
+
+    /** if status is != 'ok' error variable is updated to the returned error message
+     */
       } else {
         this.setState({error: r.error, isLoading: false});
         return r;
-      }
-    })
-    .then(r => {console.log(r)})
-  }
+      }}).then(r => {console.log(r)})}
 
   render() {
-    let {error, isLoading} = this.state;
+    let {error, isLoading, report_html, validated} = this.state;
 
+    /** function that renders error if not null */
     const renderError = ()=>{
       if(error) {
         return <p className="error">{error}</p>
@@ -60,26 +75,40 @@ class ProfilerForm extends Component {
       }
     }
 
+    /** function that renders spinner if not false */
     const renderSpinning = ()=>{
       if(isLoading) {
-        return <Spinner className='spinner' animation="border" variant="primary" size={150}><span className="sr-only">Loading...</span></Spinner>
+        return <Spinner className='spinner' animation="border" variant="primary" style={{width:'5rem', height:'5rem'}}><span className="sr-only">Loading...</span></Spinner>
+      } else {
+        return
+      }
+    }
+    /** function that renders profile button if not null */
+    const renderProfileButton = ()=>{
+      if(report_html) {
+        return <ViewProfileButton report_html={report_html}/>
       } else {
         return
       }
     }
 
+    /** renders form
+   * renders spinner if set to true
+   * renders error message if not null
+   */
     return (
       <div className="container">
       <div className="py-5 text-center">
           <h2>Generate a data profile of the first 10K rows of one of your Snowflake tables</h2>
           {renderError()}
           {renderSpinning()}
+          {renderProfileButton()}
       </div>
       <div class="row">
       <div class="col-8 col-xs-12 order-md-1 mx-auto">
         <h4 class="mb-3">Snowflake details:</h4>
     <div className='full_page'>
-          <Form id='profiler-form' className="needs-validation" noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+          <Form id='profiler-form' className="needs-validation" noValidate validated={validated} onSubmit={this.handleSubmit}>
               <Form.Group md="4" controlId="username">
                 <Form.Label>Snowflake Username</Form.Label>
                 <Form.Control

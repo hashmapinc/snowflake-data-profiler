@@ -22,6 +22,8 @@ def input_error(err):
         return 'Please enter a value for Snowflake account'
     elif '002043' in error:
         return 'Snowflake warehouse is not authorized or does not exist'
+    elif 'A required variable has not been added.' == error:
+        return 'A required variable has not been added. Please fill out all required fields.'
     elif error.startswith('shape mismatch:'):
         return f'Congratulations, you found a bug! This bug is our top priority right now and has to do with how your table data is being read by our Python backend. We have had luck rerunning the profile request, so please give it another try. Otherwise, you can leave feedback above and we will reach out when we figure out how to fix this.\n\nError: {error}'
     else:

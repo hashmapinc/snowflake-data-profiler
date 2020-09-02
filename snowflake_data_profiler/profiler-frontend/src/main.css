@@ -25,8 +25,8 @@ p {
   border-color: rgb(239, 238, 239);
   border-radius: 50%;
   border-top: 8px solid #3498db;
-  width: 60px;
-  height: 60px;
+  width: 5rem;
+  height: 5rem;
   color: rgb(70, 172, 236);
   -webkit-animation: spin 2s linear infinite;
   /* Safari */

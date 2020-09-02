@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Navbar from './Components/Navbar'
-import ProfilerForm from './Components/Table'
+import ProfilerForm from './Components/ProfilerForm'
 
 import './main.css'
 import './App.css';
