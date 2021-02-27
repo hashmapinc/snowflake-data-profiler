@@ -11,3 +11,4 @@ WTForms==2.3.1
 pytest==6.0.0
 mock==4.0.2
 matplotlib==3.2.2
+cryptography>=3.2 # not directly required, pinned by Snyk to avoid a vulnerability
