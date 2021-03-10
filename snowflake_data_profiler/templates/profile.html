@@ -33,53 +33,78 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
   <title>Snowflake Data Profiler by Hashmap</title>
-  <link rel="icon" type="image/png" href="{{ url_for('static', filename='Marketing Accelerator Favicon.png') }}">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
     integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='Marketing Accelerator Favicon.png') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style>
+      .dropdown:hover .dropdown-menu{
+          display: block;
+      }
+      .dropdown-menu{
+          margin-top: 0;
+      }
+  </style>
+  <script>
+    $(document).ready(function(){
+        $(".dropdown").hover(function(){
+            var dropdownMenu = $(this).children(".dropdown-menu");
+            if(dropdownMenu.is(":visible")){
+                dropdownMenu.parent().toggleClass("open");
+            }
+        });
+    });
+  </script>
 </head>
 
 <header class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
   <a class="navbar-brand" href="https://www.hashmapinc.com/" target="_blank">
     <img src="/static/hashmap_banner_white.png" width="200px" />
   </a>
-
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
   <div class="collapse navbar-collapse" id="navbarNav">
-    <div class="mx-auto my-2 text-white">
-      <h3>Snowflake Data Profiler</h3>
-    </div>
-
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="https://www.youtube.com/watch?v=Y3FpEnMveps" target="_blank">How-To Video</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout" target="_blank">Contact
-          Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="https://github.com/hashmapinc/snowflake-data-profiler" target="_blank">GitHub Repo </a>
-      </li>
-      <li class="nav-item">
-        <a href="{{ url_for('static', filename='sample_reports/sample-profile.html') }}" target="_blank" class="nav-item btn btn-primary ml-3">
-          See a Sample Profile
-        </a>
-      </li>
-    </ul>
+        <div class="mx-auto my-2 text-white">
+          <h3>Snowflake Data Profiler</h3>
+        </div>
+      <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.youtube.com/watch?v=Y3FpEnMveps" target="_blank">How-To Video</a>
+          </li>
+          <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Utilities</a>
+              <div class="dropdown-menu">
+                  <a href="http://snowflakeinspector.hashmapinc.com/" target="_blank" class="dropdown-item">Snowflake Inspector</a>
+                  <a href="https://healthcheck.snowflakeinspector.com/" target="_blank" class="dropdown-item">Snowflake Healthcheck</a>
+                  <a href="https://estimator.snowflakeinspector.com/" target="_blank" class="dropdown-item">Snowflake Estimator</a>
+              </div>
+          </li>
+          <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Info</a>
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="https://www.hashmapinc.com/snowflake-utilities-accelerators" target="_blank">Other Accelerators</a>
+                  <a class="dropdown-item" href="https://github.com/hashmapinc/snowflake-data-profiler" target="_blank">GitHub Repo</a>
+                  <a class="dropdown-item" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback</a>
+                  <a class="dropdown-item" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout" target="_blank">Contact Us</a>
+              </div>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('static', filename='sample_reports/sample-profile.html') }}" target="_blank" class="nav-item btn btn-primary ml-3">
+              See a Sample Profile
+            </a>
+          </li>
+      </ul>
   </div>
 </header>
 
