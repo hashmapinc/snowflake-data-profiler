@@ -22,6 +22,31 @@
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158371739-3"></script>
+
+  <script>
+    // Local cookie handling funcs.
+    function getCookie(name) {
+      var match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+      return match ? match[1] : null;
+    }
+    function deleteCookie(name) {
+      document.cookie = name +"=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    }
+    function handleCookieOptOut() {
+        _hsp.push(['revokeCookieConsent']);
+        deleteCookie('_hs_form_submitted');
+        deleteCookie('__hs_opt_out');
+        deleteCookie('__hs_initial_opt_in');
+        deleteCookie('hubspotutk');
+        window.open("https://www.hashmapinc.com/opt-out")
+        window.location.reload();
+    }
+    // If there is no HubSpot cookie (from HubSpot) or HubSpot form submitted cookie (from Hashmap), show consent form.
+    if (!getCookie("hubspotutk") || !getCookie("_hs_form_submitted")) {
+      document.location.href = "consent";
+    }
+  </script>
+
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -97,6 +122,7 @@
                   <a class="dropdown-item" href="https://github.com/hashmapinc/snowflake-data-profiler" target="_blank">GitHub Repo</a>
                   <a class="dropdown-item" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback</a>
                   <a class="dropdown-item" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout" target="_blank">Contact Us</a>
+                  <a class="dropdown-item" href="javascript:handleCookieOptOut()">Opt Out of Cookie Agreement</a>
               </div>
           </li>
           <li class="nav-item">

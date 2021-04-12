@@ -15,6 +15,11 @@ def get_data():
 
     return render_template('profile.html', title='Profiler')
 
+@bp.route('/consent', methods=['GET'])
+def get_consent():
+    """default get handler"""
+
+    return render_template('consent.html', title='Consent Form')
 
 @bp.route('/', methods=['POST'])
 def post_data():
