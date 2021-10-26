@@ -30,20 +30,21 @@
       return match ? match[1] : null;
     }
     function deleteCookie(name) {
-      document.cookie = name +"=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     }
     function handleCookieOptOut() {
-        _hsp.push(['revokeCookieConsent']);
-        deleteCookie('_hs_form_submitted');
-        deleteCookie('__hs_opt_out');
-        deleteCookie('__hs_initial_opt_in');
-        deleteCookie('hubspotutk');
-        window.open("https://www.hashmapinc.com/opt-out")
-        window.location.reload();
+      _hsp.push(['revokeCookieConsent']);
+      deleteCookie('_hs_form_submitted');
+      deleteCookie('__hs_opt_out');
+      deleteCookie('__hs_initial_opt_in');
+      deleteCookie('hubspotutk');
+      window.open("https://www.hashmapinc.com/opt-out")
+      window.location.reload();
     }
     // If there is no HubSpot cookie (from HubSpot) or HubSpot form submitted cookie (from Hashmap), show consent form.
     if (!getCookie("hubspotutk") || !getCookie("_hs_form_submitted")) {
-      document.location.href = "consent";
+      // DAH: Remove comment once HubSpot CSP is addressed by HubSpot.
+      // document.location.href = "consent";
     }
   </script>
 
@@ -72,21 +73,22 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <style>
-      .dropdown:hover .dropdown-menu{
-          display: block;
-      }
-      .dropdown-menu{
-          margin-top: 0;
-      }
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu {
+      margin-top: 0;
+    }
   </style>
   <script>
-    $(document).ready(function(){
-        $(".dropdown").hover(function(){
-            var dropdownMenu = $(this).children(".dropdown-menu");
-            if(dropdownMenu.is(":visible")){
-                dropdownMenu.parent().toggleClass("open");
-            }
-        });
+    $(document).ready(function () {
+      $(".dropdown").hover(function () {
+        var dropdownMenu = $(this).children(".dropdown-menu");
+        if (dropdownMenu.is(":visible")) {
+          dropdownMenu.parent().toggleClass("open");
+        }
+      });
     });
   </script>
 </head>
@@ -95,42 +97,49 @@
   <a class="navbar-brand" href="https://www.hashmapinc.com/" target="_blank">
     <img src="/static/hashmap_banner_white.png" width="200px" />
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-        <div class="mx-auto my-2 text-white">
-          <h3>Snowflake Data Profiler</h3>
+    <div class="mx-auto my-2 text-white">
+      <h3>Snowflake Data Profiler</h3>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.youtube.com/watch?v=Y3FpEnMveps" target="_blank">How-To Video</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Utilities</a>
+        <div class="dropdown-menu">
+          <a href="http://snowflakeinspector.hashmapinc.com/" target="_blank" class="dropdown-item">Snowflake
+            Inspector</a>
+          <a href="https://healthcheck.snowflakeinspector.com/" target="_blank" class="dropdown-item">Snowflake
+            Healthcheck</a>
+          <a href="https://estimator.snowflakeinspector.com/" target="_blank" class="dropdown-item">Snowflake
+            Estimator</a>
         </div>
-      <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.youtube.com/watch?v=Y3FpEnMveps" target="_blank">How-To Video</a>
-          </li>
-          <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Other Utilities</a>
-              <div class="dropdown-menu">
-                  <a href="http://snowflakeinspector.hashmapinc.com/" target="_blank" class="dropdown-item">Snowflake Inspector</a>
-                  <a href="https://healthcheck.snowflakeinspector.com/" target="_blank" class="dropdown-item">Snowflake Healthcheck</a>
-                  <a href="https://estimator.snowflakeinspector.com/" target="_blank" class="dropdown-item">Snowflake Estimator</a>
-              </div>
-          </li>
-          <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Info</a>
-              <div class="dropdown-menu">
-                  <a class="dropdown-item" href="https://www.hashmapinc.com/snowflake-utilities-accelerators" target="_blank">Other Accelerators</a>
-                  <a class="dropdown-item" href="https://github.com/hashmapinc/snowflake-data-profiler" target="_blank">GitHub Repo</a>
-                  <a class="dropdown-item" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback</a>
-                  <a class="dropdown-item" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout" target="_blank">Contact Us</a>
-                  <a class="dropdown-item" href="javascript:handleCookieOptOut()">Opt Out of Cookie Agreement</a>
-              </div>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url_for('static', filename='sample_reports/sample-profile.html') }}" target="_blank" class="nav-item btn btn-primary ml-3">
-              See a Sample Profile
-            </a>
-          </li>
-      </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">More Info</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="https://www.hashmapinc.com/snowflake-utilities-accelerators"
+            target="_blank">Other Accelerators</a>
+          <a class="dropdown-item" href="https://github.com/hashmapinc/snowflake-data-profiler" target="_blank">GitHub
+            Repo</a>
+          <a class="dropdown-item" href="https://forms.gle/WfiB6YctX5Jg2zTs6" target="_blank">Feedback</a>
+          <a class="dropdown-item" href="https://www.hashmapinc.com/snowflakedataprofiler-reachout"
+            target="_blank">Contact Us</a>
+          <a class="dropdown-item" href="javascript:handleCookieOptOut()">Opt Out of Cookie Agreement</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url_for('static', filename='sample_reports/sample-profile.html') }}" target="_blank"
+          class="nav-item btn btn-primary ml-3">
+          See a Sample Profile
+        </a>
+      </li>
+    </ul>
   </div>
 </header>
 
@@ -154,7 +163,8 @@
 
           <div class="mb-3">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="elon.musk@tesla.com" required="">
+            <input type="text" class="form-control" id="username" name="username" placeholder="elon.musk@tesla.com"
+              required="">
             <div class="invalid-feedback">
               Please enter a Snowflake username.
             </div>
@@ -162,7 +172,8 @@
 
           <div class="mb-3">
             <label for="password">Snowflake password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="cybertruck2021" required="">
+            <input type="password" class="form-control" id="password" name="password" placeholder="cybertruck2021"
+              required="">
             <div class="invalid-feedback">
               Please enter your Snowflake password.
             </div>
@@ -170,7 +181,8 @@
 
           <div class="mb-3">
             <label for="url">Snowflake URL <span class="text-muted">(or account name)</span></label>
-            <input type="text" class="form-control" id="url" name="url" placeholder="https://tesla.snowflakecomputing.com" required="">
+            <input type="text" class="form-control" id="url" name="url"
+              placeholder="https://tesla.snowflakecomputing.com" required="">
             <div class="invalid-feedback">
               Please enter your Snowflake URL.
             </div>
@@ -183,7 +195,8 @@
 
           <div class="mb-3">
             <label for="warehouse">Snowflake Virtual Warehouse <span class="text-muted">(Optional)</span></label>
-            <input type="text" class="form-control" id="warehouse" name="warehouse" placeholder="FLAMETHROWER_REPORTING_WH">
+            <input type="text" class="form-control" id="warehouse" name="warehouse"
+              placeholder="FLAMETHROWER_REPORTING_WH">
           </div>
 
           <div class="mb-3">
@@ -193,7 +206,7 @@
               Please enter your Snowflake database name.
             </div>
           </div>
-          
+
           <div class="mb-3">
             <label for="schema">Schema</label>
             <input type="text" class="form-control" id="schema" name="schema" placeholder="INVENTORY" required="">
@@ -201,7 +214,7 @@
               Please enter your Snowflake schema name.
             </div>
           </div>
-          
+
           <div class="mb-3">
             <label for="table">Table or View</label>
             <input type="text" class="form-control" id="table" name="table" placeholder="MODEL_Y_INVENTORY" required="">
@@ -217,7 +230,7 @@
       </div>
     </div>
 
-    <div class='spacer'/>
+    <div class='spacer' />
   </div>
 
   <!-- Start of HubSpot Embed Code -->
@@ -233,30 +246,30 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 
-    <script>
-      // Form validity check.
-      (function() {
-        'use strict';
+  <script>
+    // Form validity check.
+    (function () {
+      'use strict';
 
-        window.addEventListener('load', function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
+      window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
 
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-              } else {
-                $("#spinner").show();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-        }, false);
-      })();
-    </script>
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            } else {
+              $("#spinner").show();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
 </body>
 
 </html>
