@@ -1,7 +1,7 @@
 Flask-WTF==0.14.3
 Flask==1.1.2
 gunicorn
-Jinja2==2.11.2
+Jinja2==2.11.3
 pandas-profiling==2.8.0
 pandas==1.0.5
 pyarrow==0.17.1
